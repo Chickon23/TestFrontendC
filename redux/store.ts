@@ -1,7 +1,7 @@
 import { createWrapper } from "next-redux-wrapper";
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 
-// import { configReducer } from "../config/slices/configSlice";
+import { configReducer } from "../config/slices/configSlice";
 // import { landingpageReducer } from "../landingPage/slices/landingpageSlice";
 // import { stelrFullTextReducer } from "../search/slices/stelrFullTextSlice";
 // import { stelrFullTextOffsetReducer } from "../jobs/slices/stelrFullTextOffsetSlice";
@@ -10,7 +10,7 @@ import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 const makeStore = () =>
   configureStore({
     reducer: {
-      //   [configReducer.name]: configReducer.reducer,
+      [configReducer.name]: configReducer.reducer,
       //   [landingpageReducer.name]: landingpageReducer.reducer,
       //   [stelrFullTextReducer.name]: stelrFullTextReducer.reducer,
       //   [stelrFullTextOffsetReducer.name]: stelrFullTextOffsetReducer.reducer,
@@ -19,7 +19,7 @@ const makeStore = () =>
     devTools: true,
   });
 
-export const wrapper = createWrapper(makeStore, { debug: true });
+export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppState = ReturnType<AppStore["getState"]>;
