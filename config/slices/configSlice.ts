@@ -1,7 +1,10 @@
 import { HYDRATE } from "next-redux-wrapper";
 import { createSlice, createAsyncThunk, AnyAction } from "@reduxjs/toolkit";
 import { AppState } from "../../redux/store";
+
 import axios from "axios";
+
+import { IConfigState } from "./types";
 
 export const getConfig = createAsyncThunk("config/getConfig", async () => {
   const portal = "green";
@@ -11,17 +14,6 @@ export const getConfig = createAsyncThunk("config/getConfig", async () => {
 
   return data;
 });
-
-type ConfigEntity = {
-  color: string;
-  name: string;
-};
-
-// this apply to more than one store-slice - we should move it to its own file
-export interface State {
-  entities: Array<ConfigEntity>;
-  loading: Boolean;
-}
 
 export const configReducer = createSlice({
   name: "config",
@@ -34,7 +26,7 @@ export const configReducer = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
-    builder.addCase(HYDRATE, (state: State, action: AnyAction) => {
+    builder.addCase(HYDRATE, (state: IConfigState, action: AnyAction) => {
       return {
         ...state,
         ...action.payload.config,
