@@ -4,7 +4,7 @@ import { AppState } from "../../redux/store";
 import axios from "axios";
 
 export const getConfig = createAsyncThunk("config/getConfig", async () => {
-  const portal = "blue";
+  const portal = "green";
   const { data } = await axios.get(
     `https://dev.orchardcms.stellenanzeigen.de/${portal}/api/contenttypes/config`
   );
@@ -17,6 +17,7 @@ type ConfigEntity = {
   name: string;
 };
 
+// this apply to more than one store-slice - we should move it to its own file
 export interface State {
   entities: Array<ConfigEntity>;
   loading: Boolean;

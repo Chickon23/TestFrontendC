@@ -1,7 +1,9 @@
-import type { NextPage } from "next";
+import type { NextLayoutComponentType } from "next";
+import { ReactNode } from "react";
+import Layout from "../layout/components/Layout";
 import styled from "styled-components";
 
-const Home: NextPage = () => {
+const Home: NextLayoutComponentType = () => {
   return (
     <StyledMainContainer>
       <StyledMain>
@@ -14,6 +16,10 @@ const Home: NextPage = () => {
     </StyledMainContainer>
   );
 };
+
+Home.getLayout = (page: ReactNode) => (
+  <Layout pageTitle="Homepage">{page}</Layout>
+);
 
 const StyledMainContainer = styled.div`
   padding: 0 2rem;

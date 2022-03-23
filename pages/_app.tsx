@@ -1,36 +1,35 @@
-import App, { AppInitialProps } from "next/app";
+import { ReactNode } from "react";
+
+import App from "next/app";
+import type { AppLayoutProps } from "next/app";
+
 import { wrapper } from "../redux/store";
 import { getConfig } from "../config/slices/configSlice";
+
 import { createGlobalStyle } from "styled-components";
 
-class MyApp extends App<AppInitialProps> {
-  public static getInitialProps = wrapper.getInitialAppProps(
-    (store) => async (context) => {
-      const globalConfig = await store.dispatch(getConfig());
-
-      return {
-        pageProps: {
-          ...(await App.getInitialProps(context)).pageProps,
-          config: globalConfig,
-        },
-      };
-    }
-  );
-
-  public render() {
-    const { Component, pageProps } = this.props;
-    // const getLayout = Component.getLayout || ((page) => page);
-
-    const { Color } = pageProps.config.payload;
-
-    return (
-      //getLayout(
-      <>
-        <GlobalStyle color={Color} />
-        <Component {...pageProps} />
-      </>
-    );
+MyApp.getInitialProps = wrapper.getInitialAppProps(
+  (store) => async (context) => {
+    const globalConfig = await store.dispatch(getConfig());
+    return {
+      pageProps: {
+        ...(await App.getInitialProps(context)).pageProps,
+        config: globalConfig,
+      },
+    };
   }
+);
+
+function MyApp({ Component, pageProps }: AppLayoutProps) {
+  const getLayout = Component.getLayout ?? ((page: ReactNode) => page);
+  const { Color } = pageProps.config.payload;
+
+  return getLayout(
+    <>
+      <GlobalStyle color={Color} />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 const GlobalStyle = createGlobalStyle<{ color: string }>`
