@@ -3,15 +3,17 @@ import Link from "next/link";
 import Layout from "../../layout/components/Layout";
 // import JobList from "../../jobs/components/jobList";
 import { wrapper } from "../../redux/store";
-import { useSelector } from "react-redux";
-import {
-  getStelrFullTextSearch,
-  selectFullTextSearch,
-} from "../../search/slices/stelrFullTextSlice";
-import axios from "axios";
-import { StyledLpContainer, StyledLpTitle } from "./styles";
 
-export default function LocationLp({ lpData }) {
+import { StyledLpContainer, StyledLpTitle } from "./styles";
+import {NextLayoutComponentType} from "next";
+import {getLandingpage} from "../../landingPage/slices/landingpageSlice";
+
+type LocationLpProps = {
+    name: string,
+    //seoText: string
+}
+
+const LocationLp: NextLayoutComponentType<LocationLpProps> = (  ) => {
   //const data = useSelector(selectFullTextSearch);
 
   return (
@@ -41,14 +43,18 @@ LocationLp.getLayout = (page) => (
   <Layout pageTitle="JOBS/<...>/">{page}</Layout>
 );
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context) => {
-    const lpRes = await axios.get(
-      `http://localhost:6767/api/landingpage/${context.params.location}/`
-    );
-    const lpData = await lpRes.data;
-    await store.dispatch(getStelrFullTextSearch({ payload: lpData.name }));
+export default LocationLp;
 
-    return { props: { lpData } };
-  }
-);
+export const getServerSideProps = wrapper.getServerSideProps(
+    (store) => async (context) => {
+        //getLandingpage({payload: ${context.params.location} })
+        const landingpage = await store.dispatch(getLandingpage());
+
+        console.log('landingpage is:', landingpage )
+        return {
+            props: {
+                landingPage: landingpage.payload,
+            },
+        };
+    }
+)
