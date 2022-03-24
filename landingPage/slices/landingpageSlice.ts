@@ -6,42 +6,43 @@ import axios from "axios";
 
 import { ILandingpageState, LandingpageEntity } from "./types";
 
-export const getLandingpage = createAsyncThunk("landingpage/getLandingpage", async () => {
+export const getLandingpage = createAsyncThunk(
+  "landingpage/getLandingpage",
+  async (landingpageUrlKey: string) => {
     const portal = "green";
-    const landingpageUrlKey = "/jobs/muenchen";
     const { data } = await axios.get(
-        `http://dev.nomad.stellenanzeigen.de/api/temp/landingpage?portalName=${portal}&urlKey=${landingpageUrlKey}`
+      `http://dev.nomad.stellenanzeigen.de/api/temp/landingpage?portalName=${portal}&urlKey=${landingpageUrlKey}`
     );
-    console.log('data is now: ', data)
 
     return data;
-});
+  }
+);
 
 const initialState: ILandingpageState = {
-    entities: {} as LandingpageEntity,
-    loading: false,
+  entities: {} as LandingpageEntity,
+  loading: false,
 };
 
 export const landingpageReducer = createSlice({
-    name: "landingpage",
+  name: "landingpage",
 
-    initialState,
+  initialState,
 
-    reducers: {},
+  reducers: {},
 
-    extraReducers: (builder) => {
-        builder.addCase(HYDRATE, (state: ILandingpageState, action: AnyAction) => {
-            return {
-                ...state,
-                ...action.payload.landingpage,
-            };
-        });
-        builder.addCase(getLandingpage.fulfilled, (state, { payload }) => {
-            state.loading = false;
-            state.entities = payload;
-        });
-    },
+  extraReducers: (builder) => {
+    builder.addCase(HYDRATE, (state: ILandingpageState, action: AnyAction) => {
+      return {
+        ...state,
+        ...action.payload.landingpage,
+      };
+    });
+    builder.addCase(getLandingpage.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.entities = payload;
+    });
+  },
 });
 
 export const selectLandingpage = (state: AppState) =>
-    state?.[landingpageReducer.name]?.entities;
+  state?.[landingpageReducer.name]?.entities;
