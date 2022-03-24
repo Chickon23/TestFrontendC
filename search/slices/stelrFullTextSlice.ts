@@ -9,10 +9,8 @@ import { ISearchState, FullTextSearchEntity } from "./types";
 
 export const getStelrFullTextSearch = createAsyncThunk(
   "stelr/getStelrFullTextSearch",
-  async (action: AnyAction) => {
-    const { data } = await stelr.get(
-      mapStelrQueryStringFullText(action.payload)
-    );
+  async ({ query }: { query: string | string[] }) => {
+    const { data } = await stelr.get(mapStelrQueryStringFullText(query));
     return data;
   }
 );

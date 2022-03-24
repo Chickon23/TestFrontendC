@@ -1,17 +1,21 @@
 import React from "react";
 import Link from "next/link";
+import { NextLayoutComponentType } from "next";
+
 import Layout from "../../layout/components/Layout";
 // import JobList from "../../jobs/components/jobList";
+
 import { wrapper } from "../../redux/store";
 import { useSelector } from "react-redux";
 import {
   getStelrIdSearch,
   selectStelrIdSearch,
 } from "../../search/slices/stelrIdSlice";
+
 import { StyledJobContainer, StyledJobTitle } from "./styles";
 
-export default function JobId() {
-  // const data = useSelector(selectStelrIdSearch);
+const JobId: NextLayoutComponentType = () => {
+  const data = useSelector(selectStelrIdSearch);
 
   return (
     <StyledJobContainer>
@@ -35,16 +39,21 @@ export default function JobId() {
       )} */}
     </StyledJobContainer>
   );
-}
+};
 
 JobId.getLayout = (page) => <Layout pageTitle="JOB-ID">{page}</Layout>;
 
+export default JobId;
+
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
-    await store.dispatch(
-      getStelrIdSearch({
-        payload: context.params["jobId"],
-      })
-    );
+    const jobId =
+      context.params !== undefined && context.params.jobId !== undefined
+        ? context.params.jobId
+        : "";
+
+    await store.dispatch(getStelrIdSearch({ jobId }));
+
+    return { props: {} };
   }
 );

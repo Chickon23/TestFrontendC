@@ -12,11 +12,9 @@ import {
   selectLandingpage,
 } from "../../landingPage/slices/landingpageSlice";
 
-import { LocationLpProps } from "./types";
-
 import { StyledLpContainer, StyledLpTitle } from "./styles";
 
-const LocationLp: NextLayoutComponentType<LocationLpProps> = () => {
+const LocationLp: NextLayoutComponentType = () => {
   const data = useSelector(selectLandingpage);
 
   return (
@@ -50,7 +48,8 @@ export default LocationLp;
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
-    const landingpageUrlKey = context.resolvedUrl;
+    // we need to find a better way or make sure that the backend is designed in a suitable format
+    const landingpageUrlKey = context.resolvedUrl.split("?")[0].slice(0, -1);
     await store.dispatch(getLandingpage(landingpageUrlKey));
 
     return { props: {} };

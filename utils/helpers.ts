@@ -33,19 +33,19 @@ export const umlautDecode = (word: string) => {
   return word;
 };
 
-export const mapStelrQueryStringId = (id: string) => {
+export const mapStelrQueryStringId = (id: string | string[]) => {
   return `jobs?ids=${id}&limit=25&offset=0&setRelevanceMarker=true&sort=RelevanzHighscore&sortOrder=DESC`;
 };
 
 export const mapStelrQueryStringFullText = (
-  query: string,
+  query: string | string[],
   offset: number = 0
 ) => {
   return `jobs?fulltext=${query}&limit=25&offset=${offset}&setRelevanceMarker=true&sort=RelevanzHighscore&sortOrder=DESC`;
 };
 
 export const mapStelrQueryStringSimilarSearch = (
-  id: string,
+  id: string | string[],
   subcategoryIds: Array<number>,
   locationIds: Array<string>
 ) => {
