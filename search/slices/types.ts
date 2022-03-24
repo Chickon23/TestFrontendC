@@ -82,6 +82,6 @@ type FullTextSearchEntity = {
 };
 
 export interface ISearchState {
-  entities: Array<FullTextSearchEntity>;
+  entities: FullTextSearchEntity;
   loading: Boolean;
 }

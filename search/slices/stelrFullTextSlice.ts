@@ -13,7 +13,6 @@ export const getStelrFullTextSearch = createAsyncThunk(
     const { data } = await stelr.get(
       mapStelrQueryStringFullText(action.payload)
     );
-    console.log({ data });
     return data;
   }
 );
@@ -31,7 +30,7 @@ export const stelrFullTextReducer = createSlice({
   name: "stelrFullText",
 
   initialState: {
-    entities: [],
+    entities: {} as any,
     loading: false,
   },
 
@@ -61,7 +60,7 @@ export const stelrFullTextReducer = createSlice({
       getStelrFullTextOffsetSearch.fulfilled,
       (state: ISearchState, { payload }) => {
         state.loading = false;
-        state.entities[0].jobAds.push(...payload);
+        state.entities.jobAds.push(...payload);
       }
     );
     builder.addCase(

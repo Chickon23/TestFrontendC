@@ -38,7 +38,7 @@ export const stelrIdReducer = createSlice({
   name: "stelrId",
 
   initialState: {
-    entities: [],
+    entities: {} as any,
     loading: false,
   },
 
@@ -55,7 +55,7 @@ export const stelrIdReducer = createSlice({
       getStelrIdSearch.fulfilled,
       (state: ISearchState, { payload }) => {
         state.loading = false;
-        state.entities = [payload];
+        state.entities = payload;
       }
     );
     builder.addCase(getStelrIdSearch.rejected, (state: ISearchState) => {

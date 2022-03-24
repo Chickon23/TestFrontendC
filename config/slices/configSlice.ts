@@ -19,7 +19,7 @@ export const configReducer = createSlice({
   name: "config",
 
   initialState: {
-    entities: [],
+    entities: {} as any,
     loading: false,
   },
 

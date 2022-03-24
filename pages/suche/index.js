@@ -11,8 +11,7 @@ import {
 import { StyledSucheContainer, StyledSucheTitle } from "./styles";
 
 export default function Suche({ fulltext }) {
-  // const data = useSelector(selectFullTextSearch);
-
+  const data = useSelector(selectFullTextSearch);
   return (
     <StyledSucheContainer>
       <StyledSucheTitle>SEARCH RESULT</StyledSucheTitle>
