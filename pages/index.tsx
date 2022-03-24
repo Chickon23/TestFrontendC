@@ -21,7 +21,7 @@ const Home: NextLayoutComponentType = () => {
 };
 
 Home.getLayout = (page: ReactNode) => (
-  <Layout pageTitle="Homepage">{page}</Layout>
+  <Layout pageTitle="HOMEPAGE">{page}</Layout>
 );
 
 export default Home;
