@@ -1,9 +1,9 @@
-type ConfigEntity = {
+export type ConfigEntity = {
   color: string;
   name: string;
 };
 
 export interface IConfigState {
-  entities: Array<ConfigEntity>;
+  entities: ConfigEntity;
   loading: boolean;
 }

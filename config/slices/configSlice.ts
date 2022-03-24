@@ -4,7 +4,7 @@ import { AppState } from "../../redux/store";
 
 import axios from "axios";
 
-import { IConfigState } from "./types";
+import { IConfigState, ConfigEntity } from "./types";
 
 export const getConfig = createAsyncThunk("config/getConfig", async () => {
   const portal = "green";
@@ -15,13 +15,15 @@ export const getConfig = createAsyncThunk("config/getConfig", async () => {
   return data;
 });
 
+const initialState: IConfigState = {
+  entities: {} as ConfigEntity,
+  loading: false,
+};
+
 export const configReducer = createSlice({
   name: "config",
 
-  initialState: {
-    entities: {} as any,
-    loading: false,
-  },
+  initialState,
 
   reducers: {},
 

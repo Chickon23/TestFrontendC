@@ -5,7 +5,7 @@ import { stelr } from "../../utils/axios";
 import { createSlice, createAsyncThunk, AnyAction } from "@reduxjs/toolkit";
 import { AppState } from "../../redux/store";
 
-import { ISearchState } from "./types";
+import { ISearchState, FullTextSearchEntity } from "./types";
 
 export const getStelrFullTextSearch = createAsyncThunk(
   "stelr/getStelrFullTextSearch",
@@ -25,14 +25,15 @@ export const getStelrFullTextOffsetSearch = createAsyncThunk(
   }
 );
 
-// create reducer
+const initialState: ISearchState = {
+  entities: {} as FullTextSearchEntity,
+  loading: false,
+};
+
 export const stelrFullTextReducer = createSlice({
   name: "stelrFullText",
 
-  initialState: {
-    entities: {} as any,
-    loading: false,
-  },
+  initialState,
 
   reducers: {},
 
@@ -72,7 +73,6 @@ export const stelrFullTextReducer = createSlice({
   },
 });
 
-// create Selector
 export const selectFullTextSearch = (state: AppState) =>
   state?.[stelrFullTextReducer.name]?.entities;
 

@@ -6,9 +6,9 @@ import {
 import { stelr } from "../../utils/axios";
 
 import { createSlice, createAsyncThunk, AnyAction } from "@reduxjs/toolkit";
-
-import { ISearchState } from "./types";
 import { AppState } from "../../redux/store";
+
+import { ISearchState, FullTextSearchEntity } from "./types";
 
 export const getStelrIdSearch = createAsyncThunk(
   "stelr/getStelrIdSearch",
@@ -33,14 +33,15 @@ export const getStelrIdSearch = createAsyncThunk(
   }
 );
 
-// create reducer
+const initialState: ISearchState = {
+  entities: {} as FullTextSearchEntity,
+  loading: false,
+};
+
 export const stelrIdReducer = createSlice({
   name: "stelrId",
 
-  initialState: {
-    entities: {} as any,
-    loading: false,
-  },
+  initialState,
 
   reducers: {},
 
@@ -67,6 +68,5 @@ export const stelrIdReducer = createSlice({
   },
 });
 
-// create Selector
 export const selectStelrIdSearch = (state: AppState) =>
   state?.[stelrIdReducer.name]?.entities;

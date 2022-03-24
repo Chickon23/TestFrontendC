@@ -73,7 +73,7 @@ type JobAds = {
   jobAd: JobAd;
 };
 
-type FullTextSearchEntity = {
+export type FullTextSearchEntity = {
   count: number;
   countRelevant: number;
   isOnlineId?: boolean;
