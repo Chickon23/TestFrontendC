@@ -12,23 +12,19 @@ import { ISearchState, FullTextSearchEntity } from "./types";
 
 export const getStelrIdSearch = createAsyncThunk(
   "stelr/getStelrIdSearch",
-  async (action: AnyAction) => {
-    const { data } = await stelr.get(mapStelrQueryStringId(action.payload));
-    const subcategoryIds = data.jobAds[0].jobAd.subcategories;
-    const locationIds = data.jobAds[0].jobAd.locationIds;
+  async ({ jobId }: { jobId: string | string[] }) => {
+    const responseId = await stelr.get(mapStelrQueryStringId(jobId));
+    const subcategoryIds = responseId.data.jobAds[0].jobAd.subcategories;
+    const locationIds = responseId.data.jobAds[0].jobAd.locationIds;
 
-    const result = await stelr.get(
-      mapStelrQueryStringSimilarSearch(
-        action.payload,
-        subcategoryIds,
-        locationIds
-      )
+    const responseSimilar = await stelr.get(
+      mapStelrQueryStringSimilarSearch(jobId, subcategoryIds, locationIds)
     );
 
     return {
-      count: result.data.count,
-      countRelevant: result.data.countRelevant,
-      jobAds: [data.jobAds[0], ...result.data.jobAds],
+      count: responseSimilar.data.count,
+      countRelevant: responseSimilar.data.countRelevant,
+      jobAds: [responseId.data.jobAds[0], ...responseSimilar.data.jobAds],
     };
   }
 );
@@ -49,7 +45,7 @@ export const stelrIdReducer = createSlice({
     builder.addCase(HYDRATE, (state: ISearchState, action: AnyAction) => {
       return {
         ...state,
-        ...action.payload.stelrFullText,
+        ...action.payload.stelrId,
       };
     });
     builder.addCase(

@@ -5,12 +5,15 @@ import type { AppLayoutProps } from "next/app";
 
 import { wrapper } from "../redux/store";
 import { getConfig } from "../config/slices/configSlice";
+import { getAvailableLandingpages } from "../landingPage/slices/availableLandingpagesSlice";
 
 import { createGlobalStyle } from "styled-components";
 
 MyApp.getInitialProps = wrapper.getInitialAppProps(
   (store) => async (context) => {
     const globalConfig = await store.dispatch(getConfig());
+    await store.dispatch(getAvailableLandingpages());
+
     return {
       pageProps: {
         ...(await App.getInitialProps(context)).pageProps,

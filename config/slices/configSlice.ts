@@ -6,8 +6,9 @@ import axios from "axios";
 
 import { IConfigState, ConfigEntity } from "./types";
 
+import { portal } from "../../PORTAL";
+
 export const getConfig = createAsyncThunk("config/getConfig", async () => {
-  const portal = "green";
   const { data } = await axios.get(
     `https://dev.orchardcms.stellenanzeigen.de/${portal}/api/contenttypes/config`
   );
