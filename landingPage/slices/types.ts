@@ -1,8 +1,11 @@
-export type LandingpageEntity = {
+type LandingpageInfo = {
   title: string;
   urlKey: string;
   city: string;
   markDownText: string;
+};
+
+export type LandingpageEntity = LandingpageInfo & {
   fullText: string;
   categoryId?: string;
   subCategoryIds?: [];
@@ -11,5 +14,14 @@ export type LandingpageEntity = {
 
 export interface ILandingpageState {
   entities: LandingpageEntity;
+  loading: boolean;
+}
+
+export type AvailableLandingpagesEntity = {
+  landingpages: Array<LandingpageInfo>;
+};
+
+export interface IAvailableLandingpageState {
+  entities: any;
   loading: boolean;
 }

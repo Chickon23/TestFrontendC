@@ -3,6 +3,7 @@ import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 
 import { configReducer } from "../config/slices/configSlice";
 import { landingpageReducer } from "../landingPage/slices/landingpageSlice";
+import { availableLandingpagesReducer } from "../landingPage/slices/availableLandingpagesSlice";
 import { stelrFullTextReducer } from "../search/slices/stelrFullTextSlice";
 // import { stelrFullTextOffsetReducer } from "../jobs/slices/stelrFullTextOffsetSlice";
 import { stelrIdReducer } from "../search/slices/stelrIdSlice";
@@ -11,6 +12,7 @@ const makeStore = () =>
   configureStore({
     reducer: {
       [configReducer.name]: configReducer.reducer,
+      [availableLandingpagesReducer.name]: availableLandingpagesReducer.reducer,
       [landingpageReducer.name]: landingpageReducer.reducer,
       [stelrFullTextReducer.name]: stelrFullTextReducer.reducer,
       // [stelrFullTextOffsetReducer.name]: stelrFullTextOffsetReducer.reducer,

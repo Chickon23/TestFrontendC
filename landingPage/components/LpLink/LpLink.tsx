@@ -6,16 +6,16 @@ import { StyledButton } from "./styles";
 
 import { LpLinkProps } from "./types";
 
-const LpLink = ({ location, name }: LpLinkProps) => {
+const LpLink = ({ Title, UrlKey }: LpLinkProps) => {
   const router = useRouter();
 
   const handleClick = useCallback(() => {
     router.push({
-      pathname: `jobs/${location}/`,
+      pathname: `${UrlKey}`,
     });
-  }, [location, router]);
+  }, [UrlKey, router]);
 
-  return <StyledButton onClick={handleClick}>Jobs in {name}</StyledButton>;
+  return <StyledButton onClick={handleClick}>Jobs in {Title}</StyledButton>;
 };
 
 export default LpLink;

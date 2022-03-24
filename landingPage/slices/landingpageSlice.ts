@@ -6,10 +6,11 @@ import axios from "axios";
 
 import { ILandingpageState, LandingpageEntity } from "./types";
 
+import { portal } from "../../PORTAL";
+
 export const getLandingpage = createAsyncThunk(
   "landingpage/getLandingpage",
   async (landingpageUrlKey: string) => {
-    const portal = "green";
     const { data } = await axios.get(
       `http://dev.nomad.stellenanzeigen.de/api/temp/landingpage?portalName=${portal}&urlKey=${landingpageUrlKey}`
     );
