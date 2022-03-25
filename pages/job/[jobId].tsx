@@ -3,40 +3,38 @@ import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
 import Layout from "../../layout/components/Layout";
-// import JobList from "../../jobs/components/jobList";
+import JobList from "../../jobs/JobList";
 
 import { wrapper } from "../../redux/store";
 import { useSelector } from "react-redux";
 import {
   getStelrIdSearch,
-  selectStelrIdSearch,
-} from "../../search/slices/stelrIdSlice";
+  selectStelrSearch,
+} from "../../search/slices/stelrSearchSlice";
 
 import { StyledJobContainer, StyledJobTitle } from "./styles";
 
 const JobId: NextLayoutComponentType = () => {
-  const data = useSelector(selectStelrIdSearch);
+  const data = useSelector(selectStelrSearch);
 
   return (
     <StyledJobContainer>
       <StyledJobTitle>JOB-ID LANDINGPAGE</StyledJobTitle>
       <Link href="/">Back Home</Link>
-      {/* {data.jobs.length === 0 ? (
+      {data.jobAds.length === 0 ? (
         <p className="notJobList">No jobs to show!</p>
       ) : (
         <JobList
-          count={data.count}
-          countRelevant={data.countRelevant}
-          query={data.jobs[0].jobAd.positionTitle
+          query={data.jobAds[0].jobAd.positionTitle
             .split("(m/w/d)")
             .join(" ")
             .trim()}
-          jobs={data.jobs}
-          selectedJob={data.jobs[0]}
+          selectedJob={data.jobAds[0].jobAd}
           isLandingpage={false}
           isSearch={false}
+          seoText="" // placeholder only
         />
-      )} */}
+      )}
     </StyledJobContainer>
   );
 };
