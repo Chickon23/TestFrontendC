@@ -1,8 +1,17 @@
 import React from "react";
-import { JobAd } from "../search/slices/types";
-import {StyledJobTeaserContainer, StyledJobTeaserInfo } from "./styles";
 
-const JobTeaser = ({id, logoUrl, positionTitle, companyName, endDate, region} : JobAd) => {
+import { JobAd } from "../../redux/slices/types";
+
+import { StyledJobTeaserContainer, StyledJobTeaserInfo } from "./styles";
+
+const JobTeaser = ({
+  id,
+  logoUrl,
+  positionTitle,
+  companyName,
+  endDate,
+  region,
+}: JobAd) => {
   return (
     <StyledJobTeaserContainer>
       <a href={`/job/${id}/`} title={`jobTeaserLink-${id}`} />

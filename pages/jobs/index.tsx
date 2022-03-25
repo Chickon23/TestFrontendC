@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
-import Layout from "../../layout/components/Layout";
+import Layout from "../../layout/Layout";
 
 import { StyledJobsContainer, StyledJobsTitle } from "./styles";
 

@@ -65,7 +65,7 @@ export type JobAd = {
   zipCodes: Array<string>;
 };
 
-type JobAds = {
+export type JobAds = {
   distance: number;
   isRelevant: boolean;
   locationMatch: boolean;
@@ -84,4 +84,42 @@ export type StelrSearchEntity = {
 export interface ISearchState {
   entities: StelrSearchEntity;
   loading: Boolean;
+}
+
+export type ConfigEntity = {
+  color: string;
+  name: string;
+};
+
+export interface IConfigState {
+  entities: ConfigEntity;
+  loading: boolean;
+}
+
+type LandingpageInfo = {
+  title: string;
+  urlKey: string;
+  city: string;
+  markDownText: string;
+};
+
+export type LandingpageEntity = LandingpageInfo & {
+  fullText: string;
+  categoryId?: string;
+  subCategoryIds?: [];
+  jobs?: [];
+};
+
+export interface ILandingpageState {
+  entities: LandingpageEntity;
+  loading: boolean;
+}
+
+export type AvailableLandingpagesEntity = {
+  landingpages: Array<LandingpageInfo>;
+};
+
+export interface IAvailableLandingpageState {
+  entities: any;
+  loading: boolean;
 }

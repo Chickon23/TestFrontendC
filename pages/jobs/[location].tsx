@@ -2,18 +2,18 @@ import React from "react";
 import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
-import Layout from "../../layout/components/Layout";
-import JobList from "../../jobs/JobList";
+import Layout from "../../layout/Layout";
+import JobList from "../../components/JobList";
 
 import { wrapper } from "../../redux/store";
 import { useSelector } from "react-redux";
+import { JobAd } from "../../redux/slices/types";
 import {
   getLandingpage,
   selectLandingpage,
-} from "../../landingPage/slices/landingpageSlice";
+} from "../../redux/slices/landingpageSlice";
 
 import { StyledLpContainer, StyledLpTitle } from "./styles";
-import { JobAd } from "../../search/slices/types";
 
 const LocationLp: NextLayoutComponentType = () => {
   const data = useSelector(selectLandingpage);

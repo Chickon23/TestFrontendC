@@ -1,25 +1,39 @@
-import React, { SyntheticEvent, useCallback, useEffect, useRef, useState } from "react";
-import JobListHeadline from "./JobListHeadline";
-import JobTeaser from "./JobTeaser";
-import JobView from "./JobView";
-import LandingpageView from "../landingPage/components/LandingpageView/LandingpageView";
+import React, {
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import JobListHeadline from "../JobListHeadline";
+import JobTeaser from "../JobTeaser";
+import JobView from "../JobView";
+import LandingpageView from "../LandingpageView";
+
 import { v4 as uuidv4 } from "uuid";
-import {StyledJobListWrapper, StyledJobListContainer, StyledJobListTeaserContainer } from "./styles";
+
 import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../../redux/store";
+import { JobAds, JobAd } from "../../redux/slices/types";
 import {
   getStelrFullTextOffsetSearch,
   selectStelrSearch,
-} from "../search/slices/stelrSearchSlice";
-import { JobAd } from "../search/slices/types";
-import { AppState } from "../redux/store";
+} from "../../redux/slices/stelrSearchSlice";
+
+import {
+  StyledJobListWrapper,
+  StyledJobListContainer,
+  StyledJobListTeaserContainer,
+} from "./styles";
 
 type JobList = {
-    query: string;
-    seoText: string;
-    selectedJob: JobAd;
-    isLandingpage: boolean;
-    isSearch: boolean;
-}
+  query: string;
+  seoText: string;
+  selectedJob: JobAd;
+  isLandingpage: boolean;
+  isSearch: boolean;
+};
 
 const JobList = ({
   query,
@@ -27,18 +41,18 @@ const JobList = ({
   selectedJob,
   isLandingpage,
   isSearch,
-} : JobList) => {
+}: JobList) => {
   const [offset, setOffset] = useState(0);
 
   const dispatch = useDispatch();
   const isMounted = useRef(false);
 
   const { jobAds, count, countRelevant } = useSelector(selectStelrSearch);
-  const { loading } = useSelector((state:AppState) => state.stelrSearch);
+  const { loading } = useSelector((state: AppState) => state.stelrSearch);
 
   const getMoreJobs = useCallback(async () => {
     await dispatch(getStelrFullTextOffsetSearch({ query, offset }));
-  },[dispatch,query, offset]);
+  }, [dispatch, query, offset]);
 
   useEffect(() => {
     if (isMounted.current) {
@@ -48,7 +62,7 @@ const JobList = ({
     }
   }, [offset]);
 
-  const handleClick = (e : SyntheticEvent) => {
+  const handleClick = (e: SyntheticEvent) => {
     e.preventDefault();
     setOffset(offset + 25);
   };
@@ -58,7 +72,7 @@ const JobList = ({
       <JobListHeadline countRelevant={countRelevant} query={query} />
       <StyledJobListContainer>
         <StyledJobListTeaserContainer>
-          {jobAds.map((job, index) =>
+          {jobAds.map((job: JobAds, index: number) =>
             index === countRelevant - 1 ? (
               <React.Fragment key={uuidv4()}>
                 <JobTeaser {...job.jobAd} />

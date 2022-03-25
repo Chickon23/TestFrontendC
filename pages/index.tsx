@@ -1,15 +1,15 @@
 import type { NextLayoutComponentType } from "next";
 import { ReactNode } from "react";
 import { useSelector } from "react-redux";
-import { selectAvailableLandingpages } from "../landingPage/slices/availableLandingpagesSlice";
+import { selectAvailableLandingpages } from "../redux/slices/availableLandingpagesSlice";
 
 import { v4 as uuidv4 } from "uuid";
 
-import Layout from "../layout/components/Layout";
-import SearchForm from "../search/components/SearchForm";
-import LpLink from "../landingPage/components/LpLink/LpLink";
+import Layout from "../layout/Layout";
+import SearchForm from "../components/SearchForm";
+import LpLink from "../components/LpLink";
 
-import { LpLinkProps } from "../landingPage/components/LpLink/types";
+import { LpLinkProps } from "../components/LpLink/types";
 
 import { StyledMainContainer, StyledMain, StyledTitle } from "./styles";
 

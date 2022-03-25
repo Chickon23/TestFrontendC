@@ -1,8 +1,21 @@
 import React from "react";
-import { JobAd } from "../search/slices/types";
-import {StyledJobViewContainer, StyledJobViewInfo, StyledJobViewMinorInfo, StyledJobViewAd } from "./styles";
 
-const JobView = ({positionTitle, companyName, endDate, region, logoUrl} : JobAd) => {
+import { JobAd } from "../../redux/slices/types";
+
+import {
+  StyledJobViewContainer,
+  StyledJobViewInfo,
+  StyledJobViewMinorInfo,
+  StyledJobViewAd,
+} from "./styles";
+
+const JobView = ({
+  positionTitle,
+  companyName,
+  endDate,
+  region,
+  logoUrl,
+}: JobAd) => {
   return (
     <StyledJobViewContainer>
       <StyledJobViewInfo>
