@@ -19,7 +19,21 @@ const LocationLp: NextLayoutComponentType = () => {
 
   return (
     <StyledLpContainer>
-      <StyledLpTitle>THIS IS A LANDINGPAGE</StyledLpTitle>
+      <StyledLpTitle>Landing page {data.landingPage.Title} </StyledLpTitle>
+        {
+            /******************
+             NOTE: the code from below is only temporar, remove it after the jobs are properly dispayed
+             TODO: adjust the type of LandingPage Entity
+            ******************/
+        }
+        <p>
+            {data.landingPage.MarkDownText}
+        </p>
+        <div>
+            {data.jobs.map((job, index) => (
+                <div key={index}> {job.JobAd.PositionTitle} - {job.JobAd.Region} </div>
+            ))}
+        </div>
       <Link href="/">Back Home</Link>
       {/* {!data ? (
         <></>
