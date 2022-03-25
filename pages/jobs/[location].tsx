@@ -3,7 +3,7 @@ import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
 import Layout from "../../layout/components/Layout";
-// import JobList from "../../jobs/components/jobList";
+import JobList from "../../jobs/JobList";
 
 import { wrapper } from "../../redux/store";
 import { useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import {
 } from "../../landingPage/slices/landingpageSlice";
 
 import { StyledLpContainer, StyledLpTitle } from "./styles";
+import { JobAd } from "../../search/slices/types";
 
 const LocationLp: NextLayoutComponentType = () => {
   const data = useSelector(selectLandingpage);
@@ -21,21 +22,20 @@ const LocationLp: NextLayoutComponentType = () => {
     <StyledLpContainer>
       <StyledLpTitle>THIS IS A LANDINGPAGE</StyledLpTitle>
       <Link href="/">Back Home</Link>
-      {/* {!data ? (
+      {!data ? (
         <></>
-      ) : data.count === 0 ? (
+      ) : data.jobs?.length === 0 ? (
         <p>No jobs to show!</p>
       ) : (
         <JobList
-          count={data.count}
-          countRelevant={data.countRelevant}
-          query={lpData.name}
-          seoText={lpData.seoText}
-          jobs={data.jobAds}
+          query={data.title}
+          seoText={data.markDownText}
           isLandingpage={true}
           isSearch={false}
+          selectedJob={{} as JobAd}
+          isJobId={false}
         />
-      )} */}
+      )}
     </StyledLpContainer>
   );
 };

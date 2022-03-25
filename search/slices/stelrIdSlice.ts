@@ -20,7 +20,6 @@ export const getStelrIdSearch = createAsyncThunk(
     const responseSimilar = await stelr.get(
       mapStelrQueryStringSimilarSearch(jobId, subcategoryIds, locationIds)
     );
-
     return {
       count: responseSimilar.data.count,
       countRelevant: responseSimilar.data.countRelevant,

@@ -10,7 +10,7 @@ type Region = {
   zip: string;
 };
 
-type JobAd = {
+export type JobAd = {
   applicationType: string;
   ausland: boolean;
   backfill: boolean;
