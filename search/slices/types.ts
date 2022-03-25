@@ -10,7 +10,7 @@ type Region = {
   zip: string;
 };
 
-type JobAd = {
+export type JobAd = {
   applicationType: string;
   ausland: boolean;
   backfill: boolean;
@@ -73,7 +73,7 @@ type JobAds = {
   jobAd: JobAd;
 };
 
-export type FullTextSearchEntity = {
+export type StelrSearchEntity = {
   count: number;
   countRelevant: number;
   isOnlineId?: boolean;
@@ -82,6 +82,6 @@ export type FullTextSearchEntity = {
 };
 
 export interface ISearchState {
-  entities: FullTextSearchEntity;
+  entities: StelrSearchEntity;
   loading: Boolean;
 }
