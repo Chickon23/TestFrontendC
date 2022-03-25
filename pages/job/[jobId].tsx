@@ -9,13 +9,13 @@ import { wrapper } from "../../redux/store";
 import { useSelector } from "react-redux";
 import {
   getStelrIdSearch,
-  selectStelrIdSearch,
-} from "../../search/slices/stelrIdSlice";
+  selectStelrSearch,
+} from "../../search/slices/stelrSearchSlice";
 
 import { StyledJobContainer, StyledJobTitle } from "./styles";
 
 const JobId: NextLayoutComponentType = () => {
-  const data = useSelector(selectStelrIdSearch);
+  const data = useSelector(selectStelrSearch);
 
   return (
     <StyledJobContainer>
@@ -33,7 +33,6 @@ const JobId: NextLayoutComponentType = () => {
           isLandingpage={false}
           isSearch={false}
           seoText="" // placeholder only
-          isJobId={true}
         />
       )}
     </StyledJobContainer>

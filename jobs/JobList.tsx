@@ -8,11 +8,10 @@ import {StyledJobListWrapper, StyledJobListContainer, StyledJobListTeaserContain
 import { useDispatch, useSelector } from "react-redux";
 import {
   getStelrFullTextOffsetSearch,
-  selectFullTextSearch,
-} from "../search/slices/stelrFullTextSlice";
+  selectStelrSearch,
+} from "../search/slices/stelrSearchSlice";
 import { JobAd } from "../search/slices/types";
 import { AppState } from "../redux/store";
-import { selectStelrIdSearch } from "../search/slices/stelrIdSlice";
 
 type JobList = {
     query: string;
@@ -20,7 +19,6 @@ type JobList = {
     selectedJob: JobAd;
     isLandingpage: boolean;
     isSearch: boolean;
-    isJobId: boolean;
 }
 
 const JobList = ({
@@ -29,15 +27,14 @@ const JobList = ({
   selectedJob,
   isLandingpage,
   isSearch,
-  isJobId,
 } : JobList) => {
   const [offset, setOffset] = useState(0);
 
   const dispatch = useDispatch();
   const isMounted = useRef(false);
 
-  const { jobAds, count, countRelevant } = useSelector(isJobId ? selectStelrIdSearch: selectFullTextSearch);
-  const { loading } = useSelector((state:AppState) => state.stelrFullText);
+  const { jobAds, count, countRelevant } = useSelector(selectStelrSearch);
+  const { loading } = useSelector((state:AppState) => state.stelrSearch);
 
   const getMoreJobs = useCallback(async () => {
     await dispatch(getStelrFullTextOffsetSearch({ query, offset }));

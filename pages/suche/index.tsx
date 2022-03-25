@@ -9,14 +9,14 @@ import { wrapper } from "../../redux/store";
 import { useSelector } from "react-redux";
 import {
   getStelrFullTextSearch,
-  selectFullTextSearch,
-} from "../../search/slices/stelrFullTextSlice";
+  selectStelrSearch,
+} from "../../search/slices/stelrSearchSlice";
 
 import { StyledSucheContainer, StyledSucheTitle } from "./styles";
 import { JobAd } from "../../search/slices/types";
 
 const Suche: NextLayoutComponentType<{ query: string }> = ({ query }) => {
-  const data = useSelector(selectFullTextSearch);
+  const data = useSelector(selectStelrSearch);
 
   return (
     <StyledSucheContainer>
@@ -33,7 +33,6 @@ const Suche: NextLayoutComponentType<{ query: string }> = ({ query }) => {
             isSearch={true}
             seoText=""
             selectedJob={{} as JobAd}
-            isJobId={false}
           />
         )}
     </StyledSucheContainer>

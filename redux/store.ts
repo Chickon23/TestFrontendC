@@ -4,9 +4,7 @@ import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { configReducer } from "../config/slices/configSlice";
 import { landingpageReducer } from "../landingPage/slices/landingpageSlice";
 import { availableLandingpagesReducer } from "../landingPage/slices/availableLandingpagesSlice";
-import { stelrFullTextReducer } from "../search/slices/stelrFullTextSlice";
-// import { stelrFullTextOffsetReducer } from "../jobs/slices/stelrFullTextOffsetSlice";
-import { stelrIdReducer } from "../search/slices/stelrIdSlice";
+import { stelrSearchReducer } from "../search/slices/stelrSearchSlice";
 
 const makeStore = () =>
   configureStore({
@@ -14,9 +12,7 @@ const makeStore = () =>
       [configReducer.name]: configReducer.reducer,
       [availableLandingpagesReducer.name]: availableLandingpagesReducer.reducer,
       [landingpageReducer.name]: landingpageReducer.reducer,
-      [stelrFullTextReducer.name]: stelrFullTextReducer.reducer,
-      // [stelrFullTextOffsetReducer.name]: stelrFullTextOffsetReducer.reducer,
-      [stelrIdReducer.name]: stelrIdReducer.reducer,
+      [stelrSearchReducer.name]: stelrSearchReducer.reducer,
     },
     devTools: true,
   });

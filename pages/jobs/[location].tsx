@@ -33,7 +33,6 @@ const LocationLp: NextLayoutComponentType = () => {
           isLandingpage={true}
           isSearch={false}
           selectedJob={{} as JobAd}
-          isJobId={false}
         />
       )}
     </StyledLpContainer>
