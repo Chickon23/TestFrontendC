@@ -1,6 +1,33 @@
+/*
+ "WidgetSettings": [
+    {
+      "Name": "SearchResultListWidget",
+      "Settings": {
+        "JobCount": 25
+      }
+    },
+    {
+      "Name": "Super Tolle Jobs",
+      "Settings": {
+        "TopJobs": 2
+      }
+    }
+  ]
+*/
+
+export type WidgetSettingEntity = {
+  Name: string;
+  Settings: {
+    // TODO: maybe separate these properties somehow -> they depend on the type of the widget
+    JobCount?: number
+    TopJobs?: number
+    };
+};
+
 export type ConfigEntity = {
-  color: string;
-  name: string;
+  Color: string;
+  Name: string;
+  WidgetSettings: WidgetSettingEntity[];
 };
 
 export interface IConfigState {

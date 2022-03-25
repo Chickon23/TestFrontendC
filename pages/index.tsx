@@ -12,15 +12,25 @@ import LpLink from "../landingPage/components/LpLink/LpLink";
 import { LpLinkProps } from "../landingPage/components/LpLink/types";
 
 import { StyledMainContainer, StyledMain, StyledTitle } from "./styles";
+import { ConfigEntity } from "../config/slices/types";
 
-const Home: NextLayoutComponentType = () => {
+type HomeProps = {
+    config: {
+        payload: ConfigEntity
+    }
+}
+
+const Home: NextLayoutComponentType<HomeProps> = ({config:{payload}}) => {
   const { Landingpages } = useSelector(selectAvailableLandingpages);
   console.log({ Landingpages });
+
+  console.log( 'name:', payload.Name );
+  console.log( 'widgetSettings:', payload.WidgetSettings );
 
   return (
     <StyledMainContainer>
       <StyledMain>
-        <StyledTitle>Welcome to Frontend-C Prototype</StyledTitle>
+        <StyledTitle>Welcome to Frontend-C Portal {payload.Name}</StyledTitle>
         <SearchForm />
         {Landingpages.map(({ Title, UrlKey }: LpLinkProps) => {
           return <LpLink key={uuidv4()} Title={Title} UrlKey={UrlKey} />;
