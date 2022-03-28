@@ -11,8 +11,8 @@ import { getStelrFullTextSearch } from "../../search/slices/stelrSearchSlice";
 import { StyledSucheContainer, StyledSucheTitle } from "./styles";
 import { JobAd } from "../../search/slices/types";
 import { ConfigEntity, WidgetSettingEntity } from "../../config/slices/types";
-import { Widgets } from "../../widgets/widgets";
 import { Widget, WidgetSetting } from "../../widgets/types";
+import { Widgets } from "../../widgets/Widgets";
 
 type SucheProps = {
     config: {
@@ -26,8 +26,6 @@ const SupportedWidgets: Record<string, Widget<any>> = {
 };
 
 const Suche: NextLayoutComponentType<SucheProps> = ({ query, config }) => {
-  const data = useSelector(selectStelrSearch);
-
   // TODO: find a better way to do the lines below
   const jobSetting = config.payload.WidgetSettings.find(w => w.Name == JobListWidgetName) as JobListSetting;
   jobSetting.query = query;
@@ -40,23 +38,7 @@ const Suche: NextLayoutComponentType<SucheProps> = ({ query, config }) => {
     <StyledSucheContainer>
       <StyledSucheTitle>SEARCH RESULT</StyledSucheTitle>
       <Link href="/">Back Home</Link>
-        {
-            <Widgets widgetsSettings={config.payload.WidgetSettings} uiTemplates={SupportedWidgets} />
-        }
-        {/*
-            !data ? (
-          <></>
-        ) : data.count === 0 ? (
-          <p className="notJobList">No jobs to show!</p>
-        ) : (
-          <JobList
-            query={query}
-            isLandingpage={false}
-            isSearch={true}
-            seoText=""
-            selectedJob={{} as JobAd}
-          />
-        )*/}
+      <Widgets widgetsSettings={config.payload.WidgetSettings} uiTemplates={SupportedWidgets} />
     </StyledSucheContainer>
   );
 };
