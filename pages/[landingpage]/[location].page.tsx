@@ -14,25 +14,21 @@ import {
 
 import { StyledLpContainer, StyledLpTitle } from "./styles";
 import { JobAd } from "../../search/slices/types";
+import { getStelrFullTextSearch } from "../../search/slices/stelrSearchSlice";
 
 const LocationLp: NextLayoutComponentType = () => {
-  const data = useSelector(selectLandingpage);
+  const { landingPage } = useSelector(selectLandingpage);
 
   return (
     <StyledLpContainer>
-      <StyledLpTitle>Landing page {data.landingPage.Title} </StyledLpTitle>
-        <p>
-            {data.landingPage.MarkDownText}
-        </p>
+      <StyledLpTitle>I AM A LANDINGPAGE</StyledLpTitle>
       <Link href="/">Back Home</Link>
-      {!data ? (
+      {!landingPage ? (
         <></>
-      ) : data.jobs?.length === 0 ? (
-        <p>No jobs to show!</p>
       ) : (
         <JobList
-          query={data.title}
-          seoText={data.markDownText}
+          query={landingPage.Title}
+          seoText={landingPage.MarkDownText}
           isLandingpage={true}
           isSearch={false}
           selectedJob={{} as JobAd}
@@ -52,7 +48,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     // we need to find a better way or make sure that the backend is designed in a suitable format
     const landingpageUrlKey = context.resolvedUrl.split("?")[0].slice(0, -1);
+    const query = landingpageUrlKey.split("/")[2];
+
     await store.dispatch(getLandingpage(landingpageUrlKey));
+    await store.dispatch(getStelrFullTextSearch({ query }));
 
     return { props: {} };
   }

@@ -22,7 +22,6 @@ type HomeProps = {
 
 const Home: NextLayoutComponentType<HomeProps> = ({config:{payload}}) => {
   const { Landingpages } = useSelector(selectAvailableLandingpages);
-  console.log({ Landingpages });
 
   return (
     <StyledMainContainer>

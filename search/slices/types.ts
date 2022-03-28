@@ -65,7 +65,7 @@ export type JobAd = {
   zipCodes: Array<string>;
 };
 
-type JobAds = {
+export type JobAds = {
   distance: number;
   isRelevant: boolean;
   locationMatch: boolean;

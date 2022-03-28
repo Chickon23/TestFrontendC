@@ -1,10 +1,20 @@
-import React, { SyntheticEvent, useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import JobListHeadline from "./JobListHeadline";
 import JobTeaser from "./JobTeaser";
 import JobView from "./JobView";
 import LandingpageView from "../landingPage/components/LandingpageView/LandingpageView";
 import { v4 as uuidv4 } from "uuid";
-import {StyledJobListWrapper, StyledJobListContainer, StyledJobListTeaserContainer } from "./styles";
+import {
+  StyledJobListWrapper,
+  StyledJobListContainer,
+  StyledJobListTeaserContainer,
+} from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getStelrFullTextOffsetSearch,
@@ -23,7 +33,7 @@ export interface JobListSetting extends WidgetSetting {
     selectedJob: JobAd;
     isLandingpage: boolean;
     isSearch: boolean;
-}
+};
 
 const JobList : Widget<JobListSetting> = ({
   query,
@@ -38,11 +48,11 @@ const JobList : Widget<JobListSetting> = ({
   const isMounted = useRef(false);
 
   const { jobAds, count, countRelevant } = useSelector(selectStelrSearch);
-  const { loading } = useSelector((state:AppState) => state.stelrSearch);
+  const { loading } = useSelector((state: AppState) => state.stelrSearch);
 
   const getMoreJobs = useCallback(async () => {
     await dispatch(getStelrFullTextOffsetSearch({ query, offset }));
-  },[dispatch,query, offset]);
+  }, [dispatch, query, offset]);
 
   useEffect(() => {
     if (isMounted.current) {
@@ -52,25 +62,31 @@ const JobList : Widget<JobListSetting> = ({
     }
   }, [offset]);
 
-  const handleClick = (e : SyntheticEvent) => {
+  const handleClick = (e: SyntheticEvent) => {
     e.preventDefault();
     setOffset(offset + 25);
   };
-
   return (
     <StyledJobListWrapper>
-      <JobListHeadline countRelevant={countRelevant} query={query} />
+      <JobListHeadline
+        countRelevant={countRelevant}
+        query={query !== undefined ? query : ""}
+      />
       <StyledJobListContainer>
         <StyledJobListTeaserContainer>
-          {jobAds.map((job, index) =>
-            index === countRelevant - 1 ? (
-              <React.Fragment key={uuidv4()}>
-                <JobTeaser {...job.jobAd} />
-                <span>verwandte und ähnliche Stellenangebote</span>
-              </React.Fragment>
-            ) : (
-              <JobTeaser key={uuidv4()} {...job.jobAd} />
+          {jobAds !== undefined ? (
+            jobAds.map((job, index) =>
+              index === countRelevant - 1 ? (
+                <React.Fragment key={uuidv4()}>
+                  <JobTeaser {...job.jobAd} />
+                  <span>verwandte und ähnliche Stellenangebote</span>
+                </React.Fragment>
+              ) : (
+                <JobTeaser key={uuidv4()} {...job.jobAd} />
+              )
             )
+          ) : (
+            <p>No Jobs</p>
           )}
           {loading ? (
             <span>loading...</span>
@@ -81,7 +97,7 @@ const JobList : Widget<JobListSetting> = ({
           )}
         </StyledJobListTeaserContainer>
         {isLandingpage ? (
-          <LandingpageView seoText={seoText} />
+          <LandingpageView seoText={seoText !== undefined ? seoText : ""} />
         ) : isSearch ? (
           <></>
         ) : (
