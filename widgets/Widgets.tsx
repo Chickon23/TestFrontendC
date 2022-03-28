@@ -10,7 +10,7 @@ export const Widgets: React.FC<{
         {widgetsSettings &&
         widgetsSettings.map((setting, index) => {
             const Component = uiTemplates[setting.Name];
-            return <Component key={index} {...setting} />;
+            return Component && <Component key={index} {...setting} />;
         })}
     </>
 );
