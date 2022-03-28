@@ -1,10 +1,12 @@
 import React from "react";
-import { capitalise, umlautEncode } from "../utils/helpers";
+
 import {
   StyledJobListHeadlineContainer,
   StyledJobListHeadlineText,
   StyledJobListHeadlineCount,
 } from "./styles";
+
+import { capitalise, umlautEncode } from "../../utils/helpers";
 
 const JobListHeadline = ({
   countRelevant,
@@ -15,6 +17,7 @@ const JobListHeadline = ({
 }) => {
   const headline =
     query === "" && countRelevant > 10000 ? "Über 10.000 Jobs" : "";
+
   return (
     <StyledJobListHeadlineContainer>
       {headline !== "" ? (

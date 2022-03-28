@@ -4,8 +4,8 @@ import App from "next/app";
 import type { AppLayoutProps } from "next/app";
 
 import { wrapper } from "../redux/store";
-import { getConfig } from "../config/slices/configSlice";
-import { getAvailableLandingpages } from "../landingPage/slices/availableLandingpagesSlice";
+import { getConfig } from "../redux/slices/configSlice";
+import { getAvailableLandingpages } from "../redux/slices/availableLandingpagesSlice";
 
 import { createGlobalStyle } from "styled-components";
 

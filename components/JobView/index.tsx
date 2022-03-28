@@ -1,5 +1,7 @@
 import React from "react";
-import { JobAd } from "../search/slices/types";
+
+import { JobAd } from "../../redux/slices/types";
+
 import {
   StyledJobViewContainer,
   StyledJobViewInfo,

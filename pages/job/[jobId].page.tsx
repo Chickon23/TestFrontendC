@@ -2,15 +2,15 @@ import React from "react";
 import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
-import Layout from "../../layout/components/Layout";
-import JobList from "../../jobs/JobList";
+import Layout from "../../layout/Layout";
+import JobList from "../../components/JobList";
 
 import { wrapper } from "../../redux/store";
 import { useSelector } from "react-redux";
 import {
   getStelrIdSearch,
   selectStelrSearch,
-} from "../../search/slices/stelrSearchSlice";
+} from "../../redux/slices/stelrSearchSlice";
 
 import { StyledJobContainer, StyledJobTitle } from "./styles";
 

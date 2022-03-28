@@ -1,6 +1,9 @@
 import React, { FC, SyntheticEvent, useState } from "react";
+
 import { useRouter } from "next/router";
-import { umlautDecode } from "../../../utils/helpers";
+
+import { umlautDecode } from "../../utils/helpers";
+
 import { StyledForm } from "./styles";
 
 const SearchForm: FC = () => {

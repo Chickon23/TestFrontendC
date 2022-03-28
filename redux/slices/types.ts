@@ -85,3 +85,42 @@ export interface ISearchState {
   entities: StelrSearchEntity;
   loading: Boolean;
 }
+
+export type ConfigEntity = {
+  color: string;
+  name: string;
+};
+
+export interface IConfigState {
+  entities: ConfigEntity;
+  loading: boolean;
+}
+
+type LandingpageInfo = {
+  Title: string;
+  UrlKey: string;
+  City: string;
+  MarkDownText: string;
+  FullText: string;
+  CategoryId?: string;
+  SubCategoryIds?: [];
+};
+
+export type LandingpageEntity = {
+  landingPage: LandingpageInfo;
+  jobs?: [];
+};
+
+export interface ILandingpageState {
+  entities: LandingpageEntity;
+  loading: boolean;
+}
+
+export type AvailableLandingpagesEntity = {
+  landingpages: Array<LandingpageInfo>;
+};
+
+export interface IAvailableLandingpageState {
+  entities: any;
+  loading: boolean;
+}

@@ -2,14 +2,14 @@ import React from "react";
 import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
-import Layout from "../../layout/components/Layout";
-import JobList from "../../jobs/JobList";
+import Layout from "../../layout/Layout";
+import JobList from "../../components/JobList";
 
 import { wrapper } from "../../redux/store";
-import { getStelrFullTextSearch } from "../../search/slices/stelrSearchSlice";
+import { JobAd } from "../../redux/slices/types";
+import { getStelrFullTextSearch } from "../../redux/slices/stelrSearchSlice";
 
 import { StyledSucheContainer, StyledSucheTitle } from "./styles";
-import { JobAd } from "../../search/slices/types";
 
 const Suche: NextLayoutComponentType<{ query: string }> = ({ query }) => {
   return (
