@@ -6,7 +6,8 @@ import Layout from "../../layout/Layout";
 import JobList from "../../components/JobList";
 
 import { wrapper } from "../../redux/store";
-import { getStelrFullTextSearch } from "../../search/slices/stelrSearchSlice";
+import { JobAd } from "../../redux/slices/types";
+import { getStelrFullTextSearch } from "../../redux/slices/stelrSearchSlice";
 
 import { StyledSucheContainer, StyledSucheTitle } from "./styles";
 

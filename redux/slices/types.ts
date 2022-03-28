@@ -97,16 +97,17 @@ export interface IConfigState {
 }
 
 type LandingpageInfo = {
-  title: string;
-  urlKey: string;
-  city: string;
-  markDownText: string;
+  Title: string;
+  UrlKey: string;
+  City: string;
+  MarkDownText: string;
+  FullText: string;
+  CategoryId?: string;
+  SubCategoryIds?: [];
 };
 
-export type LandingpageEntity = LandingpageInfo & {
-  fullText: string;
-  categoryId?: string;
-  subCategoryIds?: [];
+export type LandingpageEntity = {
+  landingPage: LandingpageInfo;
   jobs?: [];
 };
 

@@ -69,18 +69,25 @@ const JobList = ({
 
   return (
     <StyledJobListWrapper>
-      <JobListHeadline countRelevant={countRelevant} query={query} />
+      <JobListHeadline
+        countRelevant={countRelevant}
+        query={query !== undefined ? query : ""}
+      />
       <StyledJobListContainer>
         <StyledJobListTeaserContainer>
-          {jobAds.map((job: JobAds, index: number) =>
-            index === countRelevant - 1 ? (
-              <React.Fragment key={uuidv4()}>
-                <JobTeaser {...job.jobAd} />
-                <span>verwandte und ähnliche Stellenangebote</span>
-              </React.Fragment>
-            ) : (
-              <JobTeaser key={uuidv4()} {...job.jobAd} />
+          {jobAds !== undefined ? (
+            jobAds.map((job: JobAds, index: number) =>
+              index === countRelevant - 1 ? (
+                <React.Fragment key={uuidv4()}>
+                  <JobTeaser {...job.jobAd} />
+                  <span>verwandte und ähnliche Stellenangebote</span>
+                </React.Fragment>
+              ) : (
+                <JobTeaser key={uuidv4()} {...job.jobAd} />
+              )
             )
+          ) : (
+            <p>No jobs to show...</p>
           )}
           {loading ? (
             <span>loading...</span>
