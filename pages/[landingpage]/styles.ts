@@ -18,11 +18,6 @@ export const StyledJobsContainer = styled.div`
   }
 `;
 
-export const StyledJobsTitle = styled.h1`
-  font-size: 3rem;
-  text-align: center;
-`;
-
 export const StyledLpContainer = styled.div`
   display: flex;
   flex-direction: column;

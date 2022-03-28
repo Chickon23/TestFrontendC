@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
@@ -17,9 +18,10 @@ import { getStelrFullTextSearch } from "../../search/slices/stelrSearchSlice";
 
 const LocationLp: NextLayoutComponentType = () => {
   const { landingPage } = useSelector(selectLandingpage);
+
   return (
     <StyledLpContainer>
-      <StyledLpTitle>THIS IS A LANDINGPAGE</StyledLpTitle>
+      <StyledLpTitle>I AM A LANDINGPAGE</StyledLpTitle>
       <Link href="/">Back Home</Link>
       {!landingPage ? (
         <></>
@@ -46,9 +48,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     // we need to find a better way or make sure that the backend is designed in a suitable format
     const landingpageUrlKey = context.resolvedUrl.split("?")[0].slice(0, -1);
-    await store.dispatch(getLandingpage(landingpageUrlKey));
     const query = landingpageUrlKey.split("/")[2];
+
+    await store.dispatch(getLandingpage(landingpageUrlKey));
     await store.dispatch(getStelrFullTextSearch({ query }));
+
     return { props: {} };
   }
 );
