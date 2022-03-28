@@ -15,7 +15,6 @@ const JobListHeadline = ({
 }) => {
   const headline =
     query === "" && countRelevant > 10000 ? "Über 10.000 Jobs" : "";
-  console.log({ query });
   return (
     <StyledJobListHeadlineContainer>
       {headline !== "" ? (
