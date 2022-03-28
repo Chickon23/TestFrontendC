@@ -1,8 +1,7 @@
 import { FC } from "react";
-import { WidgetSettingEntity } from "../config/slices/types";
 import { Widget, WidgetSetting } from "./types";
 
-export const Widgets: React.FC<{
+export const Widgets: FC<{
     widgetsSettings: WidgetSetting[],
     uiTemplates: Record<string, Widget<any>>;
 }> = ({ widgetsSettings, uiTemplates }) => (
