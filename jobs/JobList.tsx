@@ -12,8 +12,12 @@ import {
 } from "../search/slices/stelrSearchSlice";
 import { JobAd } from "../search/slices/types";
 import { AppState } from "../redux/store";
+import { Widget, WidgetSetting } from "../widgets/types";
+import { WidgetSettingEntity } from "../config/slices/types";
 
-type JobList = {
+export const JobListWidgetName = "SearchResultListWidget";
+
+export interface JobListSetting extends WidgetSetting {
     query: string;
     seoText: string;
     selectedJob: JobAd;
@@ -21,13 +25,13 @@ type JobList = {
     isSearch: boolean;
 }
 
-const JobList = ({
+const JobList : Widget<JobListSetting> = ({
   query,
   seoText,
   selectedJob,
   isLandingpage,
-  isSearch,
-} : JobList) => {
+  isSearch
+}) => {
   const [offset, setOffset] = useState(0);
 
   const dispatch = useDispatch();

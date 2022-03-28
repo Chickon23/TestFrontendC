@@ -15,7 +15,7 @@
   ]
 */
 
-export type WidgetSettingEntity = {
+export interface WidgetSettingEntity {
   Name: string;
   Settings: {
     // TODO: maybe separate these properties somehow -> they depend on the type of the widget
