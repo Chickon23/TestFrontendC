@@ -2,19 +2,18 @@ import React from "react";
 import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
-import Layout from "../../layout/components/Layout";
-import JobList, {JobListSetting, JobListWidgetName } from "../../jobs/JobList";
+import Layout from "../../layout/Layout";
+import JobList, {JobListSetting, JobListWidgetName } from "../../components/JobList";
 
 import { wrapper } from "../../redux/store";
-import { getStelrFullTextSearch } from "../../search/slices/stelrSearchSlice";
+import { JobAd } from "../../redux/slices/types";
+import { getStelrFullTextSearch } from "../../redux/slices/stelrSearchSlice";
 
 import { StyledSucheContainer, StyledSucheTitle } from "./styles";
-import { JobAd } from "../../search/slices/types";
-import { ConfigEntity, WidgetSettingEntity } from "../../config/slices/types";
-import { Widget, WidgetSetting } from "../../widgets/types";
-import { Widgets } from "../../widgets/Widgets";
+import { Widget } from "../../widgets/types";
+import { selectConfig } from "../../redux/slices/configSlice";
 import { useSelector } from "react-redux";
-import { selectConfig } from "../../config/slices/configSlice";
+import { Widgets } from "../../widgets/Widgets";
 
 
 const SupportedWidgets: Record<string, Widget<any>> = {

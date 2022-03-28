@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { WidgetSettingEntity } from "../config/slices/types";
+import { WidgetSettingEntity } from "../redux/slices/types";
 
 export interface WidgetSetting extends WidgetSettingEntity {
 };
