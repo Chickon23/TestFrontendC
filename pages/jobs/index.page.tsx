@@ -15,3 +15,5 @@ const Jobs: NextLayoutComponentType = () => {
 };
 
 Jobs.getLayout = (page) => <Layout pageTitle="JOBS">{page}</Layout>;
+
+export default Jobs

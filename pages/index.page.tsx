@@ -15,7 +15,6 @@ import { StyledMainContainer, StyledMain, StyledTitle } from "./styles";
 
 const Home: NextLayoutComponentType = () => {
   const { Landingpages } = useSelector(selectAvailableLandingpages);
-  console.log({ Landingpages });
 
   return (
     <StyledMainContainer>
