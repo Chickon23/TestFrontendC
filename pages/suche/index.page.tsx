@@ -26,19 +26,26 @@ const SupportedWidgets: Record<string, Widget<any>> = {
 };
 
 const Suche: NextLayoutComponentType<SucheProps> = ({ query, config }) => {
-  // TODO: find a better way to do the lines below
-  const jobSetting = config.payload.WidgetSettings.find(w => w.Name == JobListWidgetName) as JobListSetting;
-  jobSetting.query = query;
-  jobSetting.isLandingpage = false;
-  jobSetting.isSearch = true;
-  jobSetting.seoText = "";
-  jobSetting.selectedJob = {} as JobAd;
+    const widgetSettings = config.payload.WidgetSettings;
+    const foundIndex = widgetSettings.findIndex(w => w.Name == JobListWidgetName);
+    const jobSetting: JobListSetting = {
+        query: query,
+        isLandingpage: false,
+        isSearch: true,
+        seoText: "",
+        selectedJob:{} as JobAd,
+        Name: widgetSettings[foundIndex].Name,
+        Settings: widgetSettings[foundIndex].Settings
+    }
+
+    const settings = [...config.payload.WidgetSettings]
+    settings[foundIndex] = jobSetting
 
   return (
     <StyledSucheContainer>
       <StyledSucheTitle>SEARCH RESULT</StyledSucheTitle>
       <Link href="/">Back Home</Link>
-      <Widgets widgetsSettings={config.payload.WidgetSettings} uiTemplates={SupportedWidgets} />
+      <Widgets widgetsSettings={settings} uiTemplates={SupportedWidgets} />
     </StyledSucheContainer>
   );
 };
