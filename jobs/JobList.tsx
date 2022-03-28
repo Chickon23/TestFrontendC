@@ -23,7 +23,7 @@ import {
 import { JobAd } from "../search/slices/types";
 import { AppState } from "../redux/store";
 import { Widget, WidgetSetting } from "../widgets/types";
-import { WidgetSettingEntity } from "../config/slices/types";
+import { JobListWidgetSettings, WidgetSettingEntity } from "../config/slices/types";
 
 export const JobListWidgetName = "SearchResultListWidget";
 
@@ -40,7 +40,8 @@ const JobList : Widget<JobListSetting> = ({
   seoText,
   selectedJob,
   isLandingpage,
-  isSearch
+  isSearch,
+  Settings
 }) => {
   const [offset, setOffset] = useState(0);
 
@@ -53,6 +54,10 @@ const JobList : Widget<JobListSetting> = ({
   const getMoreJobs = useCallback(async () => {
     await dispatch(getStelrFullTextOffsetSearch({ query, offset }));
   }, [dispatch, query, offset]);
+
+  const jobListWidgetSettings = Settings as JobListWidgetSettings;
+  console.log("JobCount:", jobListWidgetSettings.JobCount)
+  // TODO: this jobCount will be used to load/show only this count of jobs
 
   useEffect(() => {
     if (isMounted.current) {
