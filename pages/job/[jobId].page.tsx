@@ -3,7 +3,7 @@ import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
 import Layout from "../../layout/Layout";
-import JobList from "../../components/JobList";
+import JobList, { JobListWidgetName } from "../../components/JobList";
 
 import { wrapper } from "../../redux/store";
 import { useSelector } from "react-redux";
@@ -13,9 +13,12 @@ import {
 } from "../../redux/slices/stelrSearchSlice";
 
 import { StyledJobContainer, StyledJobTitle } from "./styles";
+import { selectConfig } from "../../redux/slices/configSlice";
 
 const JobId: NextLayoutComponentType = () => {
   const data = useSelector(selectStelrSearch);
+  const { WidgetSettings } = useSelector(selectConfig);
+  const jobListSetting = WidgetSettings.find(w => w.Name == JobListWidgetName)!;
 
   return (
     <StyledJobContainer>
@@ -33,6 +36,8 @@ const JobId: NextLayoutComponentType = () => {
           isLandingpage={false}
           isSearch={false}
           seoText="" // placeholder only
+        //  Name={jobListSetting.Name}
+          Settings={jobListSetting.Settings}
         />
       )}
     </StyledJobContainer>
