@@ -13,13 +13,9 @@ import { JobAd } from "../../search/slices/types";
 import { ConfigEntity, WidgetSettingEntity } from "../../config/slices/types";
 import { Widget, WidgetSetting } from "../../widgets/types";
 import { Widgets } from "../../widgets/Widgets";
+import { useSelector } from "react-redux";
+import { selectConfig } from "../../config/slices/configSlice";
 
-type SucheProps = {
-    config: {
-        payload: ConfigEntity
-    },
-    query: string
-}
 
 const SupportedWidgets: Record<string, Widget<any>> = {
     [JobListWidgetName]: JobList,
@@ -28,20 +24,20 @@ const SupportedWidgets: Record<string, Widget<any>> = {
     // ["Widget3"]: () => (<>third widget</>),
 };
 
-const Suche: NextLayoutComponentType<SucheProps> = ({ query, config }) => {
-    const widgetSettings = config.payload.WidgetSettings;
-    const foundIndex = widgetSettings.findIndex(w => w.Name == JobListWidgetName);
+const Suche: NextLayoutComponentType<{ query: string }> = ({ query }) => {
+    const { WidgetSettings } = useSelector(selectConfig);
+    const foundIndex = WidgetSettings.findIndex(w => w.Name == JobListWidgetName);
     const jobSetting: JobListSetting = {
         query: query,
         isLandingpage: false,
         isSearch: true,
         seoText: "",
         selectedJob:{} as JobAd,
-        Name: widgetSettings[foundIndex].Name,
-        Settings: widgetSettings[foundIndex].Settings
+        Name: WidgetSettings[foundIndex].Name,
+        Settings: WidgetSettings[foundIndex].Settings
     }
 
-    const settings = [...config.payload.WidgetSettings]
+    const settings = [...WidgetSettings]
     settings[foundIndex] = jobSetting
 
   return (
