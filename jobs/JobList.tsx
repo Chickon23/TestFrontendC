@@ -62,21 +62,27 @@ const JobList = ({
     e.preventDefault();
     setOffset(offset + 25);
   };
-
   return (
     <StyledJobListWrapper>
-      <JobListHeadline countRelevant={countRelevant} query={query} />
+      <JobListHeadline
+        countRelevant={countRelevant}
+        query={query !== undefined ? query : ""}
+      />
       <StyledJobListContainer>
         <StyledJobListTeaserContainer>
-          {jobAds.map((job, index) =>
-            index === countRelevant - 1 ? (
-              <React.Fragment key={uuidv4()}>
-                <JobTeaser {...job.jobAd} />
-                <span>verwandte und ähnliche Stellenangebote</span>
-              </React.Fragment>
-            ) : (
-              <JobTeaser key={uuidv4()} {...job.jobAd} />
+          {jobAds !== undefined ? (
+            jobAds.map((job, index) =>
+              index === countRelevant - 1 ? (
+                <React.Fragment key={uuidv4()}>
+                  <JobTeaser {...job.jobAd} />
+                  <span>verwandte und ähnliche Stellenangebote</span>
+                </React.Fragment>
+              ) : (
+                <JobTeaser key={uuidv4()} {...job.jobAd} />
+              )
             )
+          ) : (
+            <p>No Jobs</p>
           )}
           {loading ? (
             <span>loading...</span>
@@ -87,7 +93,7 @@ const JobList = ({
           )}
         </StyledJobListTeaserContainer>
         {isLandingpage ? (
-          <LandingpageView seoText={seoText} />
+          <LandingpageView seoText={seoText !== undefined ? seoText : ""} />
         ) : isSearch ? (
           <></>
         ) : (
