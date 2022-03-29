@@ -16,7 +16,6 @@ import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../redux/store";
 import { JobAds, JobAd, WidgetEntity } from "../../redux/slices/types";
-import { selectConfig } from "../../redux/slices/configSlice";
 import {
   getStelrFullTextOffsetSearch,
   selectStelrSearch,
@@ -74,7 +73,7 @@ const JobList: Widget<JobListWidget> = ({
 
   const handleClick = (e: SyntheticEvent) => {
     e.preventDefault();
-    setOffset(offset + 25);
+    setOffset(offset + limit);
   };
 
   return (
@@ -101,7 +100,7 @@ const JobList: Widget<JobListWidget> = ({
           )}
           {loading ? (
             <span>loading...</span>
-          ) : count - offset > 25 ? (
+          ) : count - offset > limit ? (
             <a onClick={handleClick}>Mehr Jobs anzeigen</a>
           ) : (
             <></>
