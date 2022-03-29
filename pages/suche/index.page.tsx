@@ -9,7 +9,7 @@ import JobList, {
 } from "../../components/JobList";
 
 import { wrapper } from "../../redux/store";
-import { JobAd } from "../../redux/slices/types";
+import { JobAd, WidgetEntity } from "../../redux/slices/types";
 import { getStelrFullTextSearch } from "../../redux/slices/stelrSearchSlice";
 
 import { StyledSucheContainer, StyledSucheTitle } from "./styles";
@@ -26,23 +26,43 @@ const SupportedWidgets: Record<string, Widget<any>> = {
   // ["Widget3"]: () => (<>third widget</>),
 };
 
+type ExtendedSettings = {
+    query: string,
+    isLandingpage: boolean,
+    isSearch: boolean,
+    seoText: string,
+    selectedJob: JobAd,
+};
+
+const createJobListWidget = (widgetEntity: WidgetEntity, extendedSettings: ExtendedSettings): JobListWidget => {
+    return {
+        ...widgetEntity,
+        ...extendedSettings
+    };
+}
+
+const extendSettings = (extendedSettings: any, widgetSettings: WidgetEntity[]) : WidgetEntity[] => {
+    const jobListIndex = widgetSettings.findIndex(
+        (w) => w.Name === JobListWidgetName
+    );
+
+    const settings = [...widgetSettings];
+    settings[jobListIndex] = createJobListWidget(widgetSettings[jobListIndex], extendedSettings);
+
+    return settings;
+}
+
 const Suche: NextLayoutComponentType<{ query: string }> = ({ query }) => {
   const { WidgetSettings } = useSelector(selectConfig);
-  const foundIndex = WidgetSettings.findIndex(
-    (w) => w.Name == JobListWidgetName
-  );
-  const jobListWidget: JobListWidget = {
-    query: query,
-    isLandingpage: false,
-    isSearch: true,
-    seoText: "",
-    selectedJob: {} as JobAd,
-    Name: WidgetSettings[foundIndex].Name,
-    Settings: WidgetSettings[foundIndex].Settings,
-  };
 
-  const settings = [...WidgetSettings];
-  settings[foundIndex] = jobListWidget;
+  const extendedSettings: ExtendedSettings = {
+        query: query,
+        isLandingpage: false,
+        isSearch: true,
+        seoText:"",
+        selectedJob:{} as JobAd};
+
+  const settings = extendSettings(extendedSettings, WidgetSettings);
 
   return (
     <StyledSucheContainer>
