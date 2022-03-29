@@ -21,9 +21,7 @@ import useConfigJobCount from "../../hooks/useConfigJobCount";
 
 const SupportedWidgets: Record<string, Widget<any>> = {
   [JobListWidgetName]: JobList,
-  // Note: add here further pairs of <widgetName, UI.ReactFc> e.g.:
-  // ["Super Tolle Jobs"]: () => (<>second widget</>),
-  // ["Widget3"]: () => (<>third widget</>),
+  ["Super Tolle Jobs"]: () => (<StyledSucheTitle>second widget </StyledSucheTitle>),
 };
 
 type ExtendedSettings = {
