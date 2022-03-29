@@ -17,6 +17,7 @@ import { Widget } from "../../widgets/types";
 import { selectConfig } from "../../redux/slices/configSlice";
 import { useSelector } from "react-redux";
 import { Widgets } from "../../widgets/Widgets";
+import useConfigJobCount from "../../hooks/useConfigJobCount";
 
 const SupportedWidgets: Record<string, Widget<any>> = {
   [JobListWidgetName]: JobList,
@@ -64,16 +65,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
         : "";
 
     const {
-      config: {
-        entities: { WidgetSettings },
-      },
+      config: { entities },
     } = store.getState();
 
-    const {
-      Settings: { JobCount },
-    } = WidgetSettings.find((w) => w.Name == JobListWidgetName)!;
-
-    const limit = JobCount ? JobCount : 25;
+    const limit = useConfigJobCount(entities, JobListWidgetName);
 
     await store.dispatch(getStelrFullTextSearch({ query, limit }));
 

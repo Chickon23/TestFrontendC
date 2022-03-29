@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../redux/store";
 import { JobAds, JobAd, WidgetEntity } from "../../redux/slices/types";
+import { selectConfig } from "../../redux/slices/configSlice";
 import {
   getStelrFullTextOffsetSearch,
   selectStelrSearch,
@@ -28,6 +29,8 @@ import {
 } from "./styles";
 
 import { Widget } from "../../widgets/types";
+
+import useConfigJobCount from "../../hooks/useConfigJobCount";
 
 export const JobListWidgetName = "SearchResultListWidget";
 
@@ -45,7 +48,6 @@ const JobList: Widget<JobListWidget> = ({
   selectedJob,
   isLandingpage,
   isSearch,
-  Settings,
 }) => {
   const [offset, setOffset] = useState(0);
 
@@ -55,9 +57,9 @@ const JobList: Widget<JobListWidget> = ({
 
   const { jobAds, count, countRelevant } = useSelector(selectStelrSearch);
   const { loading } = useSelector((state: AppState) => state.stelrSearch);
-  const { JobCount } = Settings;
+  const config = useSelector(selectConfig);
 
-  const limit = JobCount ? JobCount : 25;
+  const limit = useConfigJobCount(config, JobListWidgetName);
 
   const getMoreJobs = useCallback(async () => {
     await dispatch(getStelrFullTextOffsetSearch({ query, offset, limit }));

@@ -14,6 +14,7 @@ import {
 
 import { StyledJobContainer, StyledJobTitle } from "./styles";
 import { selectConfig } from "../../redux/slices/configSlice";
+import useConfigJobCount from "../../hooks/useConfigJobCount";
 
 const JobId: NextLayoutComponentType = () => {
   const data = useSelector(selectStelrSearch);
@@ -58,16 +59,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
         : "";
 
     const {
-      config: {
-        entities: { WidgetSettings },
-      },
+      config: { entities },
     } = store.getState();
 
-    const {
-      Settings: { JobCount },
-    } = WidgetSettings.find((w) => w.Name == JobListWidgetName)!;
-
-    const limit = JobCount ? JobCount : 25;
+    const limit = useConfigJobCount(entities, JobListWidgetName);
 
     await store.dispatch(getStelrIdSearch({ jobId, limit }));
 

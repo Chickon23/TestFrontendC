@@ -128,10 +128,9 @@ export interface IAvailableLandingpageState {
 
 export interface WidgetEntity {
   Name: string;
-  Settings: JobListWidgetSettings;
+  Settings: any;
 }
 
 export interface JobListWidgetSettings {
   JobCount?: number;
-  TopJobs?: number;
 }

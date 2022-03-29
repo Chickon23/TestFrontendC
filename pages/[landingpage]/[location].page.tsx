@@ -16,6 +16,7 @@ import { JobAd } from "../../redux/slices/types";
 
 import { StyledLpContainer, StyledLpTitle } from "./styles";
 import { selectConfig } from "../../redux/slices/configSlice";
+import useConfigJobCount from "../../hooks/useConfigJobCount";
 
 const LocationLp: NextLayoutComponentType = () => {
   const { landingPage } = useSelector(selectLandingpage);
@@ -58,16 +59,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const query = landingpageUrlKey.split("/")[2];
 
     const {
-      config: {
-        entities: { WidgetSettings },
-      },
+      config: { entities },
     } = store.getState();
 
-    const {
-      Settings: { JobCount },
-    } = WidgetSettings.find((w) => w.Name == JobListWidgetName)!;
-
-    const limit = JobCount ? JobCount : 25;
+    const limit = useConfigJobCount(entities, JobListWidgetName);
 
     await store.dispatch(getLandingpage(landingpageUrlKey));
     await store.dispatch(getStelrFullTextSearch({ query, limit }));
