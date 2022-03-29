@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../redux/store";
-import { JobAds, JobAd, JobListWidgetSettings } from "../../redux/slices/types";
+import { JobAds, JobAd, JobListWidgetSettings, WidgetEntity } from "../../redux/slices/types";
 import {
   getStelrFullTextOffsetSearch,
   selectStelrSearch,
@@ -26,11 +26,11 @@ import {
   StyledJobListContainer,
   StyledJobListTeaserContainer,
 } from "./styles";
-import {Widget, WidgetSetting } from "../../widgets/types";
+import {Widget} from "../../widgets/types";
 
 export const JobListWidgetName = "SearchResultListWidget";
 
-export interface JobListSetting extends WidgetSetting {
+export interface JobListWidget extends WidgetEntity {
     query: string;
     seoText: string;
     selectedJob: JobAd;
@@ -38,7 +38,7 @@ export interface JobListSetting extends WidgetSetting {
     isSearch: boolean;
 };
 
-const JobList : Widget<JobListSetting> = ({
+const JobList : Widget<JobListWidget> = ({
   query,
   seoText,
   selectedJob,

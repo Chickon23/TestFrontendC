@@ -3,7 +3,7 @@ import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
 import Layout from "../../layout/Layout";
-import JobList, {JobListSetting, JobListWidgetName } from "../../components/JobList";
+import JobList, {JobListWidget, JobListWidgetName } from "../../components/JobList";
 
 import { wrapper } from "../../redux/store";
 import { JobAd } from "../../redux/slices/types";
@@ -26,7 +26,7 @@ const SupportedWidgets: Record<string, Widget<any>> = {
 const Suche: NextLayoutComponentType<{ query: string }> = ({ query }) => {
     const { WidgetSettings } = useSelector(selectConfig);
     const foundIndex = WidgetSettings.findIndex(w => w.Name == JobListWidgetName);
-    const jobSetting: JobListSetting = {
+    const jobListWidget: JobListWidget = {
         query: query,
         isLandingpage: false,
         isSearch: true,
@@ -37,7 +37,7 @@ const Suche: NextLayoutComponentType<{ query: string }> = ({ query }) => {
     }
 
     const settings = [...WidgetSettings]
-    settings[foundIndex] = jobSetting
+    settings[foundIndex] = jobListWidget
 
   return (
     <StyledSucheContainer>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
 import Layout from "../../layout/Layout";
-import JobList, {JobListSetting, JobListWidgetName } from "../../components/JobList";
+import JobList, {JobListWidget, JobListWidgetName } from "../../components/JobList";
 
 import { wrapper } from "../../redux/store";
 import { useSelector } from "react-redux";
@@ -35,7 +35,7 @@ const LocationLp: NextLayoutComponentType = () => {
           isLandingpage={true}
           isSearch={false}
           selectedJob={{} as JobAd}
-         // Name={jobListSetting.Name}
+          Name={jobListSetting.Name}
           Settings={jobListSetting.Settings}
         />
       )}

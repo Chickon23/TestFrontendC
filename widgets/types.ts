@@ -1,10 +1,7 @@
 import { FC } from "react";
-import { WidgetSettingEntity } from "../redux/slices/types";
+import { WidgetEntity } from "../redux/slices/types";
 
-export interface WidgetSetting extends WidgetSettingEntity {
-};
-
-export interface Widget<WidgetSetting> extends FC<WidgetSetting> {
+export interface Widget<T extends WidgetEntity> extends FC<T> {
 };
 
 

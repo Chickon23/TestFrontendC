@@ -36,7 +36,7 @@ const JobId: NextLayoutComponentType = () => {
           isLandingpage={false}
           isSearch={false}
           seoText="" // placeholder only
-        //  Name={jobListSetting.Name}
+          Name={jobListSetting.Name}
           Settings={jobListSetting.Settings}
         />
       )}

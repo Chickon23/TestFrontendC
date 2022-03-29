@@ -89,7 +89,7 @@ export interface ISearchState {
 export type ConfigEntity = {
   Color: string;
   Name: string;
-  WidgetSettings: WidgetSettingEntity[];
+  WidgetSettings: WidgetEntity[];
 };
 
 export interface IConfigState {
@@ -127,15 +127,11 @@ export interface IAvailableLandingpageState {
 }
 
 
-export interface BaseSettingsEntity {
+export interface WidgetEntity {
+  Name: string;
+  Settings: {}
 };
 
-export interface JobListWidgetSettings extends BaseSettingsEntity{
+export interface JobListWidgetSettings {
   JobCount: number
 };
-
-export interface WidgetSettingEntity {
-  Name: string;
-  Settings: BaseSettingsEntity
-};
-
