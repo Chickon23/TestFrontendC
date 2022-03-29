@@ -1,5 +1,9 @@
 import { HYDRATE } from "next-redux-wrapper";
-import { mapStelrQueryStringFullText, mapStelrQueryStringId, mapStelrQueryStringSimilarSearch } from "../../utils/helpers";
+import {
+  mapStelrQueryStringFullText,
+  mapStelrQueryStringId,
+  mapStelrQueryStringSimilarSearch,
+} from "../../utils/helpers";
 import { stelr } from "../../utils/axios";
 
 import { createSlice, createAsyncThunk, AnyAction } from "@reduxjs/toolkit";
@@ -9,29 +13,44 @@ import { ISearchState, StelrSearchEntity } from "./types";
 
 export const getStelrFullTextSearch = createAsyncThunk(
   "stelr/getStelrFullTextSearch",
-  async ({ query }: { query: string | string[] }) => {
-    const { data } = await stelr.get(mapStelrQueryStringFullText(query));
+  async ({ query, limit }: { query: string | string[]; limit: number }) => {
+    const { data } = await stelr.get(mapStelrQueryStringFullText(query, limit));
     return data;
   }
 );
 
 export const getStelrFullTextOffsetSearch = createAsyncThunk(
   "stelr/getStelrFullTextOffsetSearch",
-  async ({ query, offset }: { query: string; offset: number }) => {
-    const result = await stelr.get(mapStelrQueryStringFullText(query, offset));
+  async ({
+    query,
+    offset,
+    limit,
+  }: {
+    query: string;
+    offset: number;
+    limit: number;
+  }) => {
+    const result = await stelr.get(
+      mapStelrQueryStringFullText(query, offset, limit)
+    );
     return result.data.jobAds;
   }
 );
 
 export const getStelrIdSearch = createAsyncThunk(
   "stelr/getStelrIdSearch",
-  async ({ jobId }: { jobId: string | string[] }) => {
-    const responseId = await stelr.get(mapStelrQueryStringId(jobId));
+  async ({ jobId, limit }: { jobId: string | string[]; limit: number }) => {
+    const responseId = await stelr.get(mapStelrQueryStringId(jobId, limit));
     const subcategoryIds = responseId.data.jobAds[0].jobAd.subcategories;
     const locationIds = responseId.data.jobAds[0].jobAd.locationIds;
 
     const responseSimilar = await stelr.get(
-      mapStelrQueryStringSimilarSearch(jobId, subcategoryIds, locationIds)
+      mapStelrQueryStringSimilarSearch(
+        jobId,
+        subcategoryIds,
+        locationIds,
+        limit
+      )
     );
     return {
       count: responseSimilar.data.count,

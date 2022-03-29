@@ -15,7 +15,8 @@ import { v4 as uuidv4 } from "uuid";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../redux/store";
-import { JobAds, JobAd, JobListWidgetSettings, WidgetEntity } from "../../redux/slices/types";
+import { JobAds, JobAd, WidgetEntity } from "../../redux/slices/types";
+import { selectConfig } from "../../redux/slices/configSlice";
 import {
   getStelrFullTextOffsetSearch,
   selectStelrSearch,
@@ -26,41 +27,42 @@ import {
   StyledJobListContainer,
   StyledJobListTeaserContainer,
 } from "./styles";
-import {Widget} from "../../widgets/types";
+
+import { Widget } from "../../widgets/types";
 
 export const JobListWidgetName = "SearchResultListWidget";
 
 export interface JobListWidget extends WidgetEntity {
-    query: string;
-    seoText: string;
-    selectedJob: JobAd;
-    isLandingpage: boolean;
-    isSearch: boolean;
-};
+  query: string;
+  seoText: string;
+  selectedJob: JobAd;
+  isLandingpage: boolean;
+  isSearch: boolean;
+}
 
-const JobList : Widget<JobListWidget> = ({
+const JobList: Widget<JobListWidget> = ({
   query,
   seoText,
   selectedJob,
   isLandingpage,
   isSearch,
-  Settings
+  Settings,
 }) => {
   const [offset, setOffset] = useState(0);
 
-  const dispatch = useDispatch();
   const isMounted = useRef(false);
+
+  const dispatch = useDispatch();
 
   const { jobAds, count, countRelevant } = useSelector(selectStelrSearch);
   const { loading } = useSelector((state: AppState) => state.stelrSearch);
+  const { JobCount } = Settings;
+
+  const limit = JobCount ? JobCount : 25;
 
   const getMoreJobs = useCallback(async () => {
-    await dispatch(getStelrFullTextOffsetSearch({ query, offset }));
+    await dispatch(getStelrFullTextOffsetSearch({ query, offset, limit }));
   }, [dispatch, query, offset]);
-
-  const jobListWidgetSettings = Settings as JobListWidgetSettings;
-  console.log("JobCount:", jobListWidgetSettings.JobCount)
-  // TODO: this jobCount will be used to load/show only this count of jobs
 
   useEffect(() => {
     if (isMounted.current) {

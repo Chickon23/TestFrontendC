@@ -3,7 +3,10 @@ import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
 import Layout from "../../layout/Layout";
-import JobList, {JobListWidget, JobListWidgetName } from "../../components/JobList";
+import JobList, {
+  JobListWidget,
+  JobListWidgetName,
+} from "../../components/JobList";
 
 import { wrapper } from "../../redux/store";
 import { JobAd } from "../../redux/slices/types";
@@ -15,29 +18,30 @@ import { selectConfig } from "../../redux/slices/configSlice";
 import { useSelector } from "react-redux";
 import { Widgets } from "../../widgets/Widgets";
 
-
 const SupportedWidgets: Record<string, Widget<any>> = {
-    [JobListWidgetName]: JobList,
-    // Note: add here further pairs of <widgetName, UI.ReactFc> e.g.:
-    // ["Super Tolle Jobs"]: () => (<>second widget</>),
-    // ["Widget3"]: () => (<>third widget</>),
+  [JobListWidgetName]: JobList,
+  // Note: add here further pairs of <widgetName, UI.ReactFc> e.g.:
+  // ["Super Tolle Jobs"]: () => (<>second widget</>),
+  // ["Widget3"]: () => (<>third widget</>),
 };
 
 const Suche: NextLayoutComponentType<{ query: string }> = ({ query }) => {
-    const { WidgetSettings } = useSelector(selectConfig);
-    const foundIndex = WidgetSettings.findIndex(w => w.Name == JobListWidgetName);
-    const jobListWidget: JobListWidget = {
-        query: query,
-        isLandingpage: false,
-        isSearch: true,
-        seoText: "",
-        selectedJob:{} as JobAd,
-        Name: WidgetSettings[foundIndex].Name,
-        Settings: WidgetSettings[foundIndex].Settings
-    }
+  const { WidgetSettings } = useSelector(selectConfig);
+  const foundIndex = WidgetSettings.findIndex(
+    (w) => w.Name == JobListWidgetName
+  );
+  const jobListWidget: JobListWidget = {
+    query: query,
+    isLandingpage: false,
+    isSearch: true,
+    seoText: "",
+    selectedJob: {} as JobAd,
+    Name: WidgetSettings[foundIndex].Name,
+    Settings: WidgetSettings[foundIndex].Settings,
+  };
 
-    const settings = [...WidgetSettings]
-    settings[foundIndex] = jobListWidget
+  const settings = [...WidgetSettings];
+  settings[foundIndex] = jobListWidget;
 
   return (
     <StyledSucheContainer>
@@ -59,7 +63,19 @@ export const getServerSideProps = wrapper.getServerSideProps(
         ? context.query.voll
         : "";
 
-    await store.dispatch(getStelrFullTextSearch({ query }));
+    const {
+      config: {
+        entities: { WidgetSettings },
+      },
+    } = store.getState();
+
+    const {
+      Settings: { JobCount },
+    } = WidgetSettings.find((w) => w.Name == JobListWidgetName)!;
+
+    const limit = JobCount ? JobCount : 25;
+
+    await store.dispatch(getStelrFullTextSearch({ query, limit }));
 
     return { props: { query } };
   }

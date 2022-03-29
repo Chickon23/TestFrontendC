@@ -18,7 +18,9 @@ import { selectConfig } from "../../redux/slices/configSlice";
 const JobId: NextLayoutComponentType = () => {
   const data = useSelector(selectStelrSearch);
   const { WidgetSettings } = useSelector(selectConfig);
-  const jobListSetting = WidgetSettings.find(w => w.Name == JobListWidgetName)!;
+  const jobListSetting = WidgetSettings.find(
+    (w) => w.Name == JobListWidgetName
+  )!;
 
   return (
     <StyledJobContainer>
@@ -55,7 +57,19 @@ export const getServerSideProps = wrapper.getServerSideProps(
         ? context.params.jobId
         : "";
 
-    await store.dispatch(getStelrIdSearch({ jobId }));
+    const {
+      config: {
+        entities: { WidgetSettings },
+      },
+    } = store.getState();
+
+    const {
+      Settings: { JobCount },
+    } = WidgetSettings.find((w) => w.Name == JobListWidgetName)!;
+
+    const limit = JobCount ? JobCount : 25;
+
+    await store.dispatch(getStelrIdSearch({ jobId, limit }));
 
     return { props: {} };
   }
