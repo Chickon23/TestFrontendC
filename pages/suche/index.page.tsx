@@ -39,13 +39,11 @@ const createJobListWidget = (widgetEntity: WidgetEntity, extendedSettings: Exten
     };
 }
 
-const extendSettings = (extendedSettings: any, widgetSettings: WidgetEntity[]) : WidgetEntity[] => {
-    const jobListIndex = widgetSettings.findIndex(
-        (w) => w.Name === JobListWidgetName
-    );
+const extendSettings = (widgetSettings: WidgetEntity[], widgetName: string, extendedSettings: ExtendedSettings ) : WidgetEntity[] => {
+    const index = widgetSettings.findIndex(w => w.Name === widgetName);
 
     const settings = [...widgetSettings];
-    settings[jobListIndex] = createJobListWidget(widgetSettings[jobListIndex], extendedSettings);
+    settings[index] = createJobListWidget(widgetSettings[index], extendedSettings);
 
     return settings;
 }
@@ -53,20 +51,18 @@ const extendSettings = (extendedSettings: any, widgetSettings: WidgetEntity[]) :
 const Suche: NextLayoutComponentType<{ query: string }> = ({ query }) => {
   const { WidgetSettings } = useSelector(selectConfig);
 
-  const extendedSettings: ExtendedSettings = {
+  const jobListSettings: ExtendedSettings = {
         query: query,
         isLandingpage: false,
         isSearch: true,
         seoText:"",
         selectedJob:{} as JobAd};
 
-  const settings = extendSettings(extendedSettings, WidgetSettings);
-
   return (
     <StyledSucheContainer>
       <StyledSucheTitle>SEARCH RESULT</StyledSucheTitle>
       <Link href="/">Back Home</Link>
-      <Widgets widgetsSettings={settings} uiTemplates={SupportedWidgets} />
+      <Widgets widgetsSettings={extendSettings(WidgetSettings, JobListWidgetName, jobListSettings)} uiTemplates={SupportedWidgets} />
     </StyledSucheContainer>
   );
 };
