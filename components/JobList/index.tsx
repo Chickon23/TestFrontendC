@@ -15,7 +15,8 @@ import { v4 as uuidv4 } from "uuid";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../redux/store";
-import { JobAds, JobAd } from "../../redux/slices/types";
+import { JobAds, JobAd, WidgetEntity } from "../../redux/slices/types";
+import { selectConfig } from "../../redux/slices/configSlice";
 import {
   getStelrFullTextOffsetSearch,
   selectStelrSearch,
@@ -27,32 +28,42 @@ import {
   StyledJobListTeaserContainer,
 } from "./styles";
 
-type JobList = {
+import { Widget } from "../../widgets/types";
+
+import useConfigJobCount from "../../hooks/useConfigJobCount";
+
+export const JobListWidgetName = "SearchResultListWidget";
+
+export interface JobListWidget extends WidgetEntity {
   query: string;
   seoText: string;
   selectedJob: JobAd;
   isLandingpage: boolean;
   isSearch: boolean;
-};
+}
 
-const JobList = ({
+const JobList: Widget<JobListWidget> = ({
   query,
   seoText,
   selectedJob,
   isLandingpage,
   isSearch,
-}: JobList) => {
+}) => {
   const [offset, setOffset] = useState(0);
 
-  const dispatch = useDispatch();
   const isMounted = useRef(false);
+
+  const dispatch = useDispatch();
 
   const { jobAds, count, countRelevant } = useSelector(selectStelrSearch);
   const { loading } = useSelector((state: AppState) => state.stelrSearch);
+  const config = useSelector(selectConfig);
+
+  const limit = useConfigJobCount(config, JobListWidgetName);
 
   const getMoreJobs = useCallback(async () => {
-    await dispatch(getStelrFullTextOffsetSearch({ query, offset }));
-  }, [dispatch, query, offset]);
+    await dispatch(getStelrFullTextOffsetSearch({ query, offset, limit }));
+  }, [dispatch, query, offset, limit]);
 
   useEffect(() => {
     if (isMounted.current) {
@@ -64,7 +75,7 @@ const JobList = ({
 
   const handleClick = (e: SyntheticEvent) => {
     e.preventDefault();
-    setOffset(offset + 25);
+    setOffset(offset + limit);
   };
 
   return (
@@ -91,7 +102,7 @@ const JobList = ({
           )}
           {loading ? (
             <span>loading...</span>
-          ) : count - offset > 25 ? (
+          ) : count - offset > limit ? (
             <a onClick={handleClick}>Mehr Jobs anzeigen</a>
           ) : (
             <></>

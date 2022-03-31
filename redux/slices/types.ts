@@ -87,8 +87,9 @@ export interface ISearchState {
 }
 
 export type ConfigEntity = {
-  color: string;
-  name: string;
+  Color: string;
+  Name: string;
+  WidgetSettings: WidgetEntity[];
 };
 
 export interface IConfigState {
@@ -123,4 +124,13 @@ export type AvailableLandingpagesEntity = {
 export interface IAvailableLandingpageState {
   entities: any;
   loading: boolean;
+}
+
+export interface WidgetEntity {
+  Name: string;
+  Settings: any;
+}
+
+export interface JobListWidgetSettings {
+  JobCount?: number;
 }

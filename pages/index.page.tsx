@@ -15,15 +15,17 @@ import { StyledTitle, StyledLpSection } from "./styles";
 import { Container, Row, Col } from "react-bootstrap";
 
 import styled from "styled-components";
+import { selectConfig } from "../redux/slices/configSlice";
 
 const Home: NextLayoutComponentType = () => {
   const { Landingpages } = useSelector(selectAvailableLandingpages);
+  const { Name } = useSelector(selectConfig);
 
   return (
     <Container>
       <Row>
         <section className="py-5">
-          <StyledTitle>Welcome to Frontend-C Prototype</StyledTitle>
+          <StyledTitle>Welcome to Frontend-C Portal {Name}</StyledTitle>
         </section>
         <SearchForm />
         <StyledLpSection className="lps-wrapper d-flex flex-column flex-md-row justify-content-center py-5">

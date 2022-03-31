@@ -3,7 +3,7 @@ import Link from "next/link";
 import { NextLayoutComponentType } from "next";
 
 import Layout from "../../layout/Layout";
-import JobList from "../../components/JobList";
+import JobList, { JobListWidgetName } from "../../components/JobList";
 
 import { wrapper } from "../../redux/store";
 import { useSelector } from "react-redux";
@@ -15,9 +15,15 @@ import { getStelrFullTextSearch } from "../../redux/slices/stelrSearchSlice";
 import { JobAd } from "../../redux/slices/types";
 
 import { StyledLpContainer, StyledLpTitle } from "./styles";
+import { selectConfig } from "../../redux/slices/configSlice";
+import useConfigJobCount from "../../hooks/useConfigJobCount";
 
 const LocationLp: NextLayoutComponentType = () => {
   const { landingPage } = useSelector(selectLandingpage);
+  const { WidgetSettings } = useSelector(selectConfig);
+  const jobListSetting = WidgetSettings.find(
+    (w) => w.Name == JobListWidgetName
+  )!;
 
   return (
     <StyledLpContainer>
@@ -32,6 +38,8 @@ const LocationLp: NextLayoutComponentType = () => {
           isLandingpage={true}
           isSearch={false}
           selectedJob={{} as JobAd}
+          Name={jobListSetting.Name}
+          Settings={jobListSetting.Settings}
         />
       )}
     </StyledLpContainer>
@@ -50,8 +58,14 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const landingpageUrlKey = context.resolvedUrl.split("?")[0].slice(0, -1);
     const query = landingpageUrlKey.split("/")[2];
 
+    const {
+      config: { entities },
+    } = store.getState();
+
+    const limit = useConfigJobCount(entities, JobListWidgetName);
+
     await store.dispatch(getLandingpage(landingpageUrlKey));
-    await store.dispatch(getStelrFullTextSearch({ query }));
+    await store.dispatch(getStelrFullTextSearch({ query, limit }));
 
     return { props: {} };
   }
