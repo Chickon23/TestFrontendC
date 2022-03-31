@@ -63,7 +63,7 @@ const JobList: Widget<JobListWidget> = ({
 
   const getMoreJobs = useCallback(async () => {
     await dispatch(getStelrFullTextOffsetSearch({ query, offset, limit }));
-  }, [dispatch, query, offset]);
+  }, [dispatch, query, offset, limit]);
 
   useEffect(() => {
     if (isMounted.current) {
