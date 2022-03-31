@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 import { JobAd } from "../../redux/slices/types";
@@ -34,7 +35,13 @@ const JobView = ({
         >
           JETZT BEWERBEN
         </button>
-        <img src={logoUrl} />
+        <Image
+          src={logoUrl}
+          alt="Logo Url"
+          width={100}
+          height={45}
+          layout="fixed"
+        />
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industries standard dummy text ever
@@ -76,8 +83,8 @@ const JobView = ({
           the majority have suffered alteration in some form, by injected
           humour, or randomised words which dont look even slightly believable.
           If you are going to use a passage of Lorem Ipsum, you need to be sure
-          there isnt anything embarrassing hidden in the middle of text. All
-          the Lorem Ipsum generators on the Internet tend to repeat predefined
+          there isnt anything embarrassing hidden in the middle of text. All the
+          Lorem Ipsum generators on the Internet tend to repeat predefined
           chunks as necessary, making this the first true generator on the
           Internet. It uses a dictionary of over 200 Latin words, combined with
           a handful of model sentence structures, to generate Lorem Ipsum which
