@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 import { JobAd } from "../../redux/slices/types";
@@ -15,7 +16,7 @@ const JobTeaser = ({
   return (
     <StyledJobTeaserContainer>
       <a href={`/job/${id}/`} title={`jobTeaserLink-${id}`} />
-      <img src={logoUrl} />
+      <Image src={logoUrl} alt="Logo Url" width={100} height={45} layout="fixed" />
       <StyledJobTeaserInfo>
         <h4>{positionTitle}</h4>
         <h5>{companyName}</h5>

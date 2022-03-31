@@ -9,6 +9,8 @@ import { getAvailableLandingpages } from "../redux/slices/availableLandingpagesS
 
 import { createGlobalStyle } from "styled-components";
 
+import "bootstrap/dist/css/bootstrap-grid.min.css";
+
 MyApp.getInitialProps = wrapper.getInitialAppProps(
   (store) => async (context) => {
     const globalConfig = await store.dispatch(getConfig());
