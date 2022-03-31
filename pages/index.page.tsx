@@ -11,7 +11,10 @@ import LpLink from "../components/LpLink";
 
 import { LpLinkProps } from "../components/LpLink/types";
 
-import { StyledMainContainer, StyledMain, StyledTitle } from "./styles";
+import { StyledTitle, StyledLpSection } from "./styles";
+import { Container, Row, Col } from "react-bootstrap";
+
+import styled from "styled-components";
 import { selectConfig } from "../redux/slices/configSlice";
 
 const Home: NextLayoutComponentType = () => {
@@ -19,15 +22,19 @@ const Home: NextLayoutComponentType = () => {
   const { Name } = useSelector(selectConfig);
 
   return (
-    <StyledMainContainer>
-      <StyledMain>
-        <StyledTitle>Welcome to Frontend-C Portal {Name}</StyledTitle>
+    <Container>
+      <Row>
+        <section className="py-5">
+          <StyledTitle>Welcome to Frontend-C Portal {Name}</StyledTitle>
+        </section>
         <SearchForm />
-        {Landingpages.map(({ Title, UrlKey }: LpLinkProps) => {
-          return <LpLink key={uuidv4()} Title={Title} UrlKey={UrlKey} />;
-        })}
-      </StyledMain>
-    </StyledMainContainer>
+        <StyledLpSection className="lps-wrapper d-flex flex-column flex-md-row justify-content-center py-5">
+          {Landingpages.map(({ Title, UrlKey }: LpLinkProps) => {
+            return <LpLink key={uuidv4()} Title={Title} UrlKey={UrlKey} />;
+          })}
+        </StyledLpSection>
+      </Row>
+    </Container>
   );
 };
 

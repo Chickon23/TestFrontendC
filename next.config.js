@@ -10,6 +10,10 @@ const nextConfig = {
   images: {
     domains: ["anzeigen.jobstatic.de"],
   },
+  i18n: {
+    locales: ["de"],
+    defaultLocale: "de",
+  },
 };
 
 module.exports = nextConfig;

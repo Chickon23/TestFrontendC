@@ -71,7 +71,7 @@ const JobList: Widget<JobListWidget> = ({
     } else {
       isMounted.current = true;
     }
-  }, [offset]);
+  }, [offset, getMoreJobs]);
 
   const handleClick = (e: SyntheticEvent) => {
     e.preventDefault();
