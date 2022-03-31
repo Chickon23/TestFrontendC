@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
-  display: flex;
-  justify-content: center;
-  margin: 5rem 0rem;
 
   input {
     font-size: 1.5rem;
