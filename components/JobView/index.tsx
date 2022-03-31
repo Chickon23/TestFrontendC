@@ -35,13 +35,15 @@ const JobView = ({
         >
           JETZT BEWERBEN
         </button>
-        <Image
-          src={logoUrl}
-          alt="Logo Url"
-          width={100}
-          height={45}
-          layout="fixed"
-        />
+        <div className="mx-auto">
+          <Image
+            src={logoUrl}
+            alt="Logo Url"
+            width={100}
+            height={45}
+            layout="fixed"
+          />
+        </div>
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industries standard dummy text ever
