@@ -12,14 +12,16 @@ import LpLink from "../components/LpLink";
 import { LpLinkProps } from "../components/LpLink/types";
 
 import { StyledMainContainer, StyledMain, StyledTitle } from "./styles";
+import { selectConfig } from "../redux/slices/configSlice";
 
 const Home: NextLayoutComponentType = () => {
   const { Landingpages } = useSelector(selectAvailableLandingpages);
+  const { Name } = useSelector(selectConfig);
 
   return (
     <StyledMainContainer>
       <StyledMain>
-        <StyledTitle>Welcome to Frontend-C Prototype</StyledTitle>
+        <StyledTitle>Welcome to Frontend-C Portal {Name}</StyledTitle>
         <SearchForm />
         {Landingpages.map(({ Title, UrlKey }: LpLinkProps) => {
           return <LpLink key={uuidv4()} Title={Title} UrlKey={UrlKey} />;
