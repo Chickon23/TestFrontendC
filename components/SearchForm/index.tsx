@@ -26,16 +26,18 @@ const SearchForm: FC = () => {
   };
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <input
-        id="stelrSearch"
-        type="text"
-        value={query}
-        placeholder="What job would you like?"
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button>Search</button>
-    </StyledForm>
+    <section>
+      <StyledForm onSubmit={handleSubmit}>
+        <input
+          id="stelrSearch"
+          type="text"
+          value={query}
+          placeholder="What job would you like?"
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button>Search</button>
+      </StyledForm>
+    </section>
   );
 };
 

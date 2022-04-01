@@ -1,21 +1,22 @@
 import styled from "styled-components";
 
-export const StyledMainContainer = styled.div`
-  padding: 0 2rem;
-`;
 
-export const StyledMain = styled.main`
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const StyledTitle = styled.h1`
+const StyledTitle = styled.h1`
   margin: 0;
   line-height: 1.15;
-  font-size: 3rem;
+  font-size: 1.2rem;
   text-align: center;
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
+
+const StyledLpSection = styled.section`
+  @media (max-width: 768px) {
+    > button {
+      margin-bottom: 5px;
+    }
+  }
+`;
+
+export { StyledTitle, StyledLpSection };
