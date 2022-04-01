@@ -2,8 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
-  experimental: {
-    // Enables the styled-components SWC transform
+  compiler: {
     styledComponents: true,
   },
   pageExtensions: ["page.tsx", "page.ts", "page.jsx", "page.js"],
