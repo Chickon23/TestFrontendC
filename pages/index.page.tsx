@@ -11,10 +11,9 @@ import LpLink from "../components/LpLink";
 
 import { LpLinkProps } from "../components/LpLink/types";
 
-import { StyledTitle, StyledLpSection } from "./styles";
-import { Container, Row, Col } from "react-bootstrap";
+import { StyledTitle, StyledLpSection } from "./homeStyles";
+import { Container, Row } from "react-bootstrap";
 
-import styled from "styled-components";
 import { selectConfig } from "../redux/slices/configSlice";
 
 const Home: NextLayoutComponentType = () => {
