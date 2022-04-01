@@ -7,7 +7,9 @@ import { wrapper } from "../redux/store";
 import { getConfig } from "../redux/slices/configSlice";
 import { getAvailableLandingpages } from "../redux/slices/availableLandingpagesSlice";
 
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import {  ThemeProvider } from "styled-components";
+
+import { GlobalStyle } from "./globalStyles";
 
 import "bootstrap/dist/css/bootstrap-grid.min.css";
 
@@ -24,28 +26,6 @@ MyApp.getInitialProps = wrapper.getInitialAppProps(
     };
   }
 );
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  }
-
-  main {
-    min-height: 100vh;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
-  }
-`;
 
 
 function MyApp({ Component, pageProps }: AppLayoutProps) {
