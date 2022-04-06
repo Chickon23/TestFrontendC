@@ -5,11 +5,13 @@ import { StyledHeaderSection } from "./headerStyles";
 
 const Header = () => {
   return (
-    <StyledHeaderSection>
+    <StyledHeaderSection className="p-5">
       <Container>
         <Row>
           <div className="d-flex flex-column justify-content-center align-items-center">
-            <div className="my-5">IMAGE PLACEHOLDER</div>
+            <div className="my-5">
+              <h1>PORTAL BLAU</h1>
+            </div>
             <SearchForm />
           </div>
         </Row>

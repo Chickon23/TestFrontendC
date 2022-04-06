@@ -4,10 +4,10 @@ import { StyledFooter } from "./footerStyles";
 
 const Footer = () => {
   return (
-    <StyledFooter className="py-5">
+    <StyledFooter>
       <section id="footer-top">
         <Container>
-          <Row className="py-5">
+          <Row className="p-5">
             <Col md={4}>
               <h3>FÜR BEWERBER</h3>
               <li>Link</li>

@@ -5,6 +5,7 @@ import { configReducer } from "./slices/configSlice";
 import { landingpageReducer } from "./slices/landingpageSlice";
 import { availableLandingpagesReducer } from "./slices/availableLandingpagesSlice";
 import { stelrSearchReducer } from "./slices/stelrSearchSlice";
+import { homeReducer } from "./slices/homepageSlice";
 
 const makeStore = () =>
   configureStore({
@@ -13,6 +14,7 @@ const makeStore = () =>
       [availableLandingpagesReducer.name]: availableLandingpagesReducer.reducer,
       [landingpageReducer.name]: landingpageReducer.reducer,
       [stelrSearchReducer.name]: stelrSearchReducer.reducer,
+      [homeReducer.name]: homeReducer.reducer,
     },
     devTools: true,
   });

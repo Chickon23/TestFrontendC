@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 const StyledHeaderSection = styled.section`
   background-color: yellow;
-  .row {
-    min-height: 270px;
+  h1 {
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;
 

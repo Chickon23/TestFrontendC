@@ -11,6 +11,10 @@ const Navigation = () => {
       text: "Home",
     },
     {
+      path: "/home/",
+      text: "Stellenanzeigen Home",
+    },
+    {
       path: "/suche/",
       text: "Suche",
     },

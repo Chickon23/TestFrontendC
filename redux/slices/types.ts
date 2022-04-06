@@ -134,3 +134,16 @@ export interface WidgetEntity {
 export interface JobListWidgetSettings {
   JobCount?: number;
 }
+
+// type HomeData = {
+//   ContentItems: any
+// };
+
+// export interface IHomeState {
+//   entities: HomeEntity;
+//   loading: Boolean;
+// }
+
+// export type HomeEntity = {
+//   BagPart: Array<HomeData>
+// };

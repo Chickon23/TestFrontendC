@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { StyledButton } from "./styles";
 
 import { LpLinkProps } from "./types";
-import { Col } from "react-bootstrap";
 
 const LpLink = ({ Title, UrlKey }: LpLinkProps) => {
   const router = useRouter();

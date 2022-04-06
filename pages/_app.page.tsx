@@ -11,7 +11,7 @@ import {  ThemeProvider } from "styled-components";
 
 import { GlobalStyle } from "./globalStyles";
 
-import "bootstrap/dist/css/bootstrap-grid.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 MyApp.getInitialProps = wrapper.getInitialAppProps(
   (store) => async (context) => {
