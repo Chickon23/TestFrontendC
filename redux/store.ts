@@ -7,7 +7,7 @@ import { availableLandingpagesReducer } from "./slices/availableLandingpagesSlic
 import { stelrSearchReducer } from "./slices/stelrSearchSlice";
 import { homeReducer } from "./slices/homepageSlice";
 
-const makeStore = () =>
+export const makeStore = () =>
   configureStore({
     reducer: {
       [configReducer.name]: configReducer.reducer,

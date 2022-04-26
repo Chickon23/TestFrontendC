@@ -7,7 +7,7 @@ import { wrapper } from "../redux/store";
 import { getConfig } from "../redux/slices/configSlice";
 import { getAvailableLandingpages } from "../redux/slices/availableLandingpagesSlice";
 
-import {  ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 
 import { GlobalStyle } from "./globalStyles";
 
@@ -27,22 +27,21 @@ MyApp.getInitialProps = wrapper.getInitialAppProps(
   }
 );
 
+export const theme = (color: string) => ({
+  colors: {
+    primary: color,
+  },
+});
 
 function MyApp({ Component, pageProps }: AppLayoutProps) {
   const getLayout = Component.getLayout ?? ((page: ReactNode) => page);
 
-  const {Color} = pageProps.config.payload
-
-  const theme = {
-    colors: {
-      primary: Color,
-    },
-  };
+  const { Color } = pageProps.config.payload;
 
   return getLayout(
     <>
       <GlobalStyle />
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme(Color)}>
         <Component {...pageProps} />
       </ThemeProvider>
     </>

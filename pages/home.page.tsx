@@ -29,7 +29,7 @@ const COMPONENTS = {
   seoText: { tag: SeoText, order: seoTextOrder },
 };
 
-const Homepage = ({ exclude = [""] }) => {
+const Homepage = ({ exclude = ["topJobs"] }) => {
   const components = useMemo(
     () =>
       Object

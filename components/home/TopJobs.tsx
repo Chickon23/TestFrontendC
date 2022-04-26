@@ -58,7 +58,7 @@ const TopJobs = ({ title }: TobJobsProps) => {
         Wir haben interessante Stellen für Sie zusammengefasst. Entdecken Sie
         die Angebote!
       </p>
-      <Slider slidesPerView={Value}>
+      {/* <Slider slidesPerView={Value}>
         {jobListArr.map(({ name }, idx) => {
           return (
             <SwiperSlide key={idx}>
@@ -70,7 +70,7 @@ const TopJobs = ({ title }: TobJobsProps) => {
             </SwiperSlide>
           );
         })}
-      </Slider>
+      </Slider> */}
     </StyledTopJobSection>
   );
 };

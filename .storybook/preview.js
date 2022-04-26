@@ -12,7 +12,6 @@ if (typeof global.process === "undefined") {
   worker.start();
 }
 
-
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -30,4 +29,9 @@ const portalGreen = "green";
 addDecorator(
   withThemes(ThemeProvider, [theme(portalBlue), theme(portalGreen)])
 );
-addDecorator((story) => <><GlobalStyle />{story()}</>);
+addDecorator((story) => (
+  <>
+    <GlobalStyle />
+    {story()}
+  </>
+));
